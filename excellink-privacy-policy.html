@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — ExcelLink for Revit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1f2e;
+      --mid: #3d4663;
+      --accent: #1e5fa8;
+      --accent-light: #e8f0fb;
+      --rule: #d0d8e8;
+      --bg: #f8f9fc;
+      --white: #ffffff;
+      --muted: #6b7898;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      font-weight: 300;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    /* ── Top bar ── */
+    .topbar {
+      background: var(--accent);
+      color: #fff;
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-align: center;
+      padding: 8px 24px;
+      font-weight: 500;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+      padding: 28px 0 0;
+    }
+
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      background: var(--accent);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: #fff;
+    }
+
+    .brand-text {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: var(--ink);
+      letter-spacing: -.01em;
+    }
+
+    .brand-text span {
+      color: var(--accent);
+    }
+
+    nav {
+      border-top: 1px solid var(--rule);
+      display: flex;
+      gap: 0;
+    }
+
+    nav a {
+      display: inline-block;
+      padding: 12px 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+
+    nav a.active, nav a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #1a2f5e 0%, #1e5fa8 60%, #2e82d4 100%);
+      color: #fff;
+      padding: 72px 32px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 20px;
+      padding: 5px 16px;
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      letter-spacing: -.02em;
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+
+    .hero p {
+      font-size: 16px;
+      opacity: .8;
+      max-width: 480px;
+      margin: 0 auto 32px;
+      font-weight: 300;
+    }
+
+    .hero-meta {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta-item {
+      font-size: 13px;
+      opacity: .75;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-meta-item::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: rgba(255,255,255,.6);
+      border-radius: 50%;
+    }
+
+    /* ── Main layout ── */
+    .layout {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 64px 32px 80px;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    /* ── Sidebar TOC ── */
+    .toc {
+      position: sticky;
+      top: 32px;
+    }
+
+    .toc-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .toc ul {
+      list-style: none;
+      border-left: 2px solid var(--rule);
+      padding-left: 16px;
+    }
+
+    .toc li { margin-bottom: 4px; }
+
+    .toc a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      display: block;
+      padding: 4px 0;
+      transition: color .2s;
+      font-weight: 400;
+    }
+
+    .toc a:hover { color: var(--accent); }
+    .toc a.active { color: var(--accent); font-weight: 500; }
+
+    /* ── Content ── */
+    .content section {
+      margin-bottom: 56px;
+      animation: fadeUp .5s ease both;
+    }
+
+    .content section:nth-child(1) { animation-delay: .05s; }
+    .content section:nth-child(2) { animation-delay: .10s; }
+    .content section:nth-child(3) { animation-delay: .15s; }
+    .content section:nth-child(4) { animation-delay: .20s; }
+    .content section:nth-child(5) { animation-delay: .25s; }
+    .content section:nth-child(6) { animation-delay: .30s; }
+    .content section:nth-child(7) { animation-delay: .35s; }
+    .content section:nth-child(8) { animation-delay: .40s; }
+    .content section:nth-child(9) { animation-delay: .45s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-num {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: 1.55rem;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -.02em;
+      margin-bottom: 16px;
+      line-height: 1.25;
+    }
+
+    p {
+      color: var(--mid);
+      margin-bottom: 16px;
+      font-size: 15px;
+    }
+
+    ul.policy-list {
+      list-style: none;
+      margin: 16px 0 16px 0;
+    }
+
+    ul.policy-list li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 10px;
+      color: var(--mid);
+      font-size: 15px;
+    }
+
+    ul.policy-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: .5;
+    }
+
+    /* ── Data table ── */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    }
+
+    .data-table thead tr {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .data-table th {
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 500;
+      letter-spacing: .03em;
+      font-size: 13px;
+    }
+
+    .data-table tbody tr { background: var(--white); }
+    .data-table tbody tr:nth-child(even) { background: var(--accent-light); }
+
+    .data-table td {
+      padding: 11px 16px;
+      color: var(--mid);
+      border-bottom: 1px solid var(--rule);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    .data-table tbody tr:last-child td { border-bottom: none; }
+
+    /* ── Callout boxes ── */
+    .callout {
+      border-left: 3px solid var(--accent);
+      background: var(--accent-light);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 20px 0;
+    }
+
+    .callout p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--ink);
+    }
+
+    .callout strong { color: var(--accent); }
+
+    /* ── Contact card ── */
+    .contact-card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-top: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+
+    .contact-row {
+      display: flex;
+      gap: 16px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: 14px;
+    }
+
+    .contact-row:last-child { border-bottom: none; }
+
+    .contact-label {
+      width: 110px;
+      flex-shrink: 0;
+      font-weight: 500;
+      color: var(--ink);
+      font-size: 13px;
+    }
+
+    .contact-value { color: var(--mid); }
+
+    .contact-value a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .contact-value a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,.5);
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 13px;
+    }
+
+    footer strong { color: rgba(255,255,255,.85); }
+
+    /* ── Responsive ── */
+    @media (max-width: 680px) {
+      .layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 40px 20px 60px;
+      }
+      .toc { display: none; }
+      .hero { padding: 48px 20px 56px; }
+      .data-table { font-size: 13px; }
+      .data-table th, .data-table td { padding: 9px 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">ExcelLink for Revit &nbsp;·&nbsp; Autodesk App Store</div>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/>
+        </svg>
+      </div>
+      <div class="brand-text">Excel<span>Link</span> for Revit</div>
+    </div>
+    <nav>
+      <a href="https://www.halukuzuner.com.tr">Home</a>
+      <a href="#" class="active">Privacy Policy</a>
+      <a href="https://apps.autodesk.com" target="_blank">App Store</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-badge">Legal Document</div>
+  <h1>Privacy Policy</h1>
+  <p>How ExcelLink for Revit collects, uses, and protects your information.</p>
+  <div class="hero-meta">
+    <span class="hero-meta-item">Effective: February 2026</span>
+    <span class="hero-meta-item">Publisher: Haluk Uzuner</span>
+    <span class="hero-meta-item">Revit 2022 – 2026</span>
+  </div>
+</section>
+
+<div class="layout">
+
+  <!-- TOC -->
+  <aside class="toc">
+    <div class="toc-label">Contents</div>
+    <ul>
+      <li><a href="#s1">1. Introduction</a></li>
+      <li><a href="#s2">2. Data We Collect</a></li>
+      <li><a href="#s3">3. How We Use Data</a></li>
+      <li><a href="#s4">4. Data Sharing</a></li>
+      <li><a href="#s5">5. Data Security</a></li>
+      <li><a href="#s6">6. Retention & Deletion</a></li>
+      <li><a href="#s7">7. Your Rights</a></li>
+      <li><a href="#s8">8. Policy Changes</a></li>
+      <li><a href="#s9">9. Contact</a></li>
+    </ul>
+  </aside>
+
+  <!-- Content -->
+  <div class="content">
+
+    <section id="s1">
+      <div class="section-num">Section 01</div>
+      <h2>Introduction</h2>
+      <p>This Privacy Policy describes how Haluk Uzuner ("Publisher", "we", "us") collects, uses, stores, and protects information when you use the <strong>ExcelLink for Revit</strong> add-in ("the App").</p>
+      <p>By installing or using the App, you agree to the practices described in this policy. This policy applies to all versions of ExcelLink for Revit compatible with Autodesk Revit 2022 through 2026.</p>
+    </section>
+
+    <section id="s2">
+      <div class="section-num">Section 02</div>
+      <h2>Data We Collect</h2>
+      <p>The App collects only the minimum data necessary to validate your license and manage active sessions. No personally identifiable information beyond what is listed below is collected.</p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Purpose</th>
+            <th>Retention</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>License key</strong></td>
+            <td>License validation and session management</td>
+            <td>Until license expiry date</td>
+          </tr>
+          <tr>
+            <td><strong>Hardware identifier</strong></td>
+            <td>Binding the license to the registered device</td>
+            <td>Until license expiry date</td>
+          </tr>
+          <tr>
+            <td><strong>Computer name</strong></td>
+            <td>Identifying the active session in the admin interface</td>
+            <td>45 days from last session activity</td>
+          </tr>
+          <tr>
+            <td><strong>Session token</strong></td>
+            <td>Maintaining an authenticated active session</td>
+            <td>45 days from last session activity</td>
+          </tr>
+          <tr>
+            <td><strong>Customer email address</strong></td>
+            <td>License issuance and support communication</td>
+            <td>Until license expiry date</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <p><strong>Important:</strong> The App does not collect, transmit, or store any Revit model data, project files, parameter values, or user-generated content of any kind. No IP addresses are logged or stored.</p>
+      </div>
+    </section>
+
+    <section id="s3">
+      <div class="section-num">Section 03</div>
+      <h2>How We Use This Data</h2>
+      <p>All collected data is used exclusively for the following purposes:</p>
+      <ul class="policy-list">
+        <li>Verifying that a valid license exists for the installed device</li>
+        <li>Enforcing concurrent session limits as defined by the license type</li>
+        <li>Enabling the offline grace period that allows the App to operate without an internet connection for a limited time</li>
+        <li>Providing license management capabilities to the publisher via a private administrative interface</li>
+      </ul>
+      <p>We do not use your data for advertising, analytics, profiling, or any purpose other than those stated above.</p>
+    </section>
+
+    <section id="s4">
+      <div class="section-num">Section 04</div>
+      <h2>Data Sharing and Third Parties</h2>
+      <p>We do not sell, rent, trade, or otherwise share your data with any third party. The license validation server is operated solely by the publisher.</p>
+      <p>No third-party analytics platforms, advertising networks, or data brokers have access to any data collected by this App.</p>
+    </section>
+
+    <section id="s5">
+      <div class="section-num">Section 05</div>
+      <h2>Data Security</h2>
+      <p>We take reasonable technical measures to protect your data:</p>
+      <ul class="policy-list">
+        <li>All communication between the App and the license server is encrypted using HTTPS (TLS)</li>
+        <li>Session tokens are randomly generated cryptographic values</li>
+        <li>The license database is stored on a private server accessible only to the publisher</li>
+      </ul>
+    </section>
+
+    <section id="s6">
+      <div class="section-num">Section 06</div>
+      <h2>Data Retention and Deletion</h2>
+      <p>Data is retained only for as long as necessary for the purposes described in this policy:</p>
+      <ul class="policy-list">
+        <li><strong>License records</strong> (license key, hardware identifier, email address) are retained until the license expiry date and deleted thereafter.</li>
+        <li><strong>Session records</strong> (session token, computer name) are automatically deleted 45 days after the last recorded session activity.</li>
+      </ul>
+      <p>You may request deletion of your data at any time by contacting us as described in Section 9. Upon a valid deletion request, all data associated with your license will be permanently removed within 30 days.</p>
+    </section>
+
+    <section id="s7">
+      <div class="section-num">Section 07</div>
+      <h2>Your Rights</h2>
+      <p>You have the right to:</p>
+      <ul class="policy-list">
+        <li>Request a copy of the data we hold about you</li>
+        <li>Request correction of inaccurate data</li>
+        <li>Request deletion of your data</li>
+        <li>Withdraw consent by ceasing use of the App and requesting data deletion</li>
+      </ul>
+      <p>To exercise any of these rights, please contact us using the information in Section 9.</p>
+    </section>
+
+    <section id="s8">
+      <div class="section-num">Section 08</div>
+      <h2>Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. When we do, the updated version will be published at <a href="https://www.halukuzuner.com.tr/privacy-policy" style="color:var(--accent);">www.halukuzuner.com.tr/privacy-policy</a> with a revised effective date.</p>
+      <p>Continued use of the App after any changes constitutes acceptance of the updated policy.</p>
+    </section>
+
+    <section id="s9">
+      <div class="section-num">Section 09</div>
+      <h2>Contact</h2>
+      <p>If you have any questions about this Privacy Policy or wish to exercise your data rights, please contact:</p>
+      <div class="contact-card">
+        <div class="contact-row">
+          <div class="contact-label">Publisher</div>
+          <div class="contact-value">Haluk Uzuner</div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-label">Website</div>
+          <div class="contact-value"><a href="https://www.halukuzuner.com.tr">www.halukuzuner.com.tr</a></div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-label">Subject</div>
+          <div class="contact-value">ExcelLink Privacy Request</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<footer>
+  <p><strong>ExcelLink for Revit</strong> &nbsp;·&nbsp; © 2026 Haluk Uzuner. All rights reserved.</p>
+  <p style="margin-top:6px;">www.halukuzuner.com.tr</p>
+</footer>
+
+<script>
+  // Highlight active TOC item on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const tocLinks = document.querySelectorAll('.toc a');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        tocLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`.toc a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
