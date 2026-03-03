@@ -1065,7 +1065,7 @@
         <li>30-day offline grace period</li>
         <li>Email support</li>
       </ul>
-      <a href="mailto:ahuzuner@gmail.com?subject=ExcelLink Personal License" class="pricing-cta pricing-cta-outline">Get Personal →</a>
+      <a href="/cdn-cgi/l/email-protection#96f7fee3ece3f8f3e4d6f1fbf7fffab8f5f9fba9e5e3f4fcf3f5e2abd3eef5f3fadafff8fdb6c6f3e4e5f9f8f7fab6dafff5f3f8e5f3" class="pricing-cta pricing-cta-outline">Get Personal →</a>
     </div>
 
     <!-- PROFESSIONAL -->
@@ -1092,7 +1092,7 @@
         <li>30-day offline grace period</li>
         <li>Email support</li>
       </ul>
-      <a href="mailto:ahuzuner@gmail.com?subject=ExcelLink Professional License" class="pricing-cta pricing-cta-filled">Get Professional →</a>
+      <a href="/cdn-cgi/l/email-protection#f19099848b849f9483b1969c90989ddf929e9cce8284939b949285ccb48992949dbd989f9ad1a1839e97948282989e9f909dd1bd9892949f8294" class="pricing-cta pricing-cta-filled">Get Professional →</a>
     </div>
 
     <!-- TEAM -->
@@ -1118,7 +1118,7 @@
         <li>30-day offline grace period</li>
         <li>Priority email support</li>
       </ul>
-      <a href="mailto:ahuzuner@gmail.com?subject=ExcelLink Team License" class="pricing-cta pricing-cta-outline">Get Team →</a>
+      <a href="/cdn-cgi/l/email-protection#caaba2bfb0bfa4afb88aada7aba3a6e4a9a5a7f5b9bfa8a0afa9bef78fb2a9afa686a3a4a1ea9eafaba7ea86a3a9afa4b9af" class="pricing-cta pricing-cta-outline">Get Team →</a>
     </div>
 
     <!-- ENTERPRISE -->
@@ -1140,7 +1140,7 @@
         <li>30-day offline grace period</li>
         <li>Dedicated support</li>
       </ul>
-      <a href="mailto:ahuzuner@gmail.com?subject=ExcelLink Enterprise License" class="pricing-cta pricing-cta-outline">Contact →</a>
+      <a href="/cdn-cgi/l/email-protection#cdaca5b8b7b8a3a8bf8daaa0aca4a1e3aea2a0f2beb8afa7a8aeb9f088b5aea8a181a4a3a6ed88a3b9a8bfbdbfa4bea8ed81a4aea8a3bea8" class="pricing-cta pricing-cta-outline">Contact →</a>
     </div>
 
   </div>
@@ -1165,4 +1165,34 @@
       <li><a href="user-guide.html">User Guide</a></li>
       <li><a href="release-notes.html">Release Notes</a></li>
       <li><a href="privacy-policy.html">Privacy Policy</a></li>
-      <li><a href="/cdn-cgi/l/email-protection#91f0f9e4ebe4fff4e3d1f6fcf0f8fdbff2fefc"><span c
+      <li><a href="mailto:ahuzuner@gmail.com">ahuzuner@gmail.com</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Haluk Uzuner</div>
+  </div>
+</footer>
+
+<script>
+  let isAnnual = false;
+  const prices = {
+    personal:     { monthly: '2.99',  annual: '2.49',  annualNote: '$29.90 / year — 2 months free' },
+    professional: { monthly: '3.99',  annual: '3.32',  annualNote: '$39.90 / year — 2 months free' },
+    team:         { monthly: '14.95', annual: '12.46', annualNote: '$149.50 / year — 2 months free' },
+  };
+
+  function switchBilling() {
+    isAnnual = !isAnnual;
+    const track = document.getElementById('toggleTrack');
+    track.classList.toggle('annual', isAnnual);
+    document.getElementById('labelMonthly').classList.toggle('active', !isAnnual);
+    document.getElementById('labelAnnual').classList.toggle('active', isAnnual);
+
+    for (const [key, val] of Object.entries(prices)) {
+      document.getElementById('price-' + key).textContent = isAnnual ? val.annual : val.monthly;
+      document.getElementById('period-' + key).textContent = isAnnual ? 'per month, billed annually' : 'per month';
+      const annualEl = document.getElementById('annual-' + key);
+      if (annualEl) annualEl.style.display = isAnnual ? 'block' : 'none';
+    }
+  }
+</script>
+</body>
+</html>
