@@ -9,30 +9,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --blue: #1B5EA6;
-    --blue-dark: #0f3d73;
-    --blue-light: #d6e4f7;
-    --green: #1D6F42;
-    --green-light: #d4edda;
-    --gray: #8a9aaa;
-    --grid: #c8d8e8;
-    --bg: #f4f7fb;
-    --white: #ffffff;
-    --text: #1a2332;
-    --text-light: #4a5a6a;
-    --border: #dde6f0;
+    --blue: #1B5EA6; --blue-dark: #0f3d73; --blue-light: #d6e4f7;
+    --green: #1D6F42; --green-light: #d4edda;
+    --gray: #8a9aaa; --grid: #c8d8e8; --bg: #f4f7fb; --white: #ffffff;
+    --text: #1a2332; --text-light: #4a5a6a; --border: #dde6f0;
   }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
   body { font-family: 'IBM Plex Sans', sans-serif; background: var(--bg); color: var(--text); }
+
   body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-    background-size: 40px 40px;
-    opacity: 0.35;
+    content: ''; position: fixed; inset: 0;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 40px 40px; opacity: 0.35;
     pointer-events: none; z-index: 0;
   }
-  nav {
+
+  /* NAV */
+  nav.topnav {
     position: sticky; top: 0; z-index: 100;
     background: rgba(244,247,251,0.92); backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
@@ -45,128 +42,118 @@
   .nav-brand span b { color: var(--blue); }
   .nav-brand span em { color: var(--green); font-style: normal; }
   .nav-links { display: flex; gap: 0.25rem; list-style: none; }
-  .nav-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; font-weight: 500; text-decoration: none; color: var(--text-light); padding: 0.4rem 0.8rem; border-radius: 6px; transition: all 0.15s; letter-spacing: 0.02em; }
+  .nav-links a {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; font-weight: 500;
+    text-decoration: none; color: var(--text-light);
+    padding: 0.4rem 0.8rem; border-radius: 6px; transition: all 0.15s;
+  }
   .nav-links a:hover { background: var(--blue-light); color: var(--blue); }
   .nav-links a.active { background: var(--blue); color: white; }
 
+  /* PAGE LAYOUT */
   .page-layout {
     position: relative; z-index: 1;
-    max-width: 1200px; margin: 0 auto;
-    padding: 4rem 2rem;
+    max-width: 1100px; margin: 0 auto;
+    padding: 4rem 2rem 6rem;
     display: grid;
-    grid-template-columns: 220px 1fr;
+    grid-template-columns: 210px 1fr;
     gap: 4rem;
     align-items: start;
   }
 
-  /* SIDEBAR TOC */
-  .toc-wrap{position:sticky;top:88px;} .toc {
-    
-    
+  /* TOC SIDEBAR */
+  .toc-sidebar {
+    position: sticky;
+    top: 88px;
     background: var(--white);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 1.5rem;
+    overflow: hidden;
   }
-  .toc-title {
+
+  .toc-header {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.65rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--gray);
-    margin-bottom: 1rem;
+    padding: 1rem 1.25rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
   }
-  .toc ul { list-style: none; }
-  .toc li { margin-bottom: 0.1rem; }
-  .toc a {
+
+  .toc-list {
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  .toc-list a {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.72rem;
     color: var(--text-light);
     text-decoration: none;
-    padding: 0.3rem 0.6rem;
+    padding: 0.35rem 0.75rem;
     border-radius: 5px;
     display: block;
     transition: all 0.15s;
   }
-  .toc a:hover { background: var(--blue-light); color: var(--blue); }
-  .toc a.active { background: var(--blue); color: white; }
-  .toc .toc-sub a { padding-left: 1.25rem; font-size: 0.68rem; }
+  .toc-list a:hover { background: var(--blue-light); color: var(--blue); }
+  .toc-list a.active { background: var(--blue); color: white; }
+
+  .toc-list .sub a {
+    padding-left: 1.5rem;
+    font-size: 0.68rem;
+  }
 
   /* CONTENT */
   .content h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    margin-bottom: 0.5rem;
+    font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 800;
+    letter-spacing: -0.03em; margin-bottom: 0.5rem;
   }
   .content .subtitle {
-    font-size: 1rem;
-    color: var(--text-light);
-    font-weight: 300;
-    margin-bottom: 3rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--border);
+    font-size: 0.875rem; color: var(--text-light); font-weight: 300;
+    margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border);
+    font-family: 'IBM Plex Mono', monospace;
   }
   .content h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin-top: 3rem;
-    margin-bottom: 1rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border);
+    font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 700;
+    letter-spacing: -0.02em; margin-top: 3rem; margin-bottom: 1rem;
+    padding-top: 2rem; border-top: 1px solid var(--border);
     scroll-margin-top: 88px;
   }
   .content h2:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
   .content h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    margin-top: 1.75rem;
-    margin-bottom: 0.5rem;
-    color: var(--blue);
-    scroll-margin-top: 88px;
+    font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
+    margin-top: 1.75rem; margin-bottom: 0.5rem;
+    color: var(--blue); scroll-margin-top: 88px;
   }
-  .content p {
-    font-size: 0.9rem;
-    line-height: 1.75;
-    color: var(--text-light);
-    margin-bottom: 1rem;
-  }
-  .content ul, .content ol {
-    margin: 0.75rem 0 1rem 1.25rem;
-  }
-  .content li {
-    font-size: 0.9rem;
-    line-height: 1.75;
-    color: var(--text-light);
-    margin-bottom: 0.25rem;
-  }
+  .content p { font-size: 0.9rem; line-height: 1.75; color: var(--text-light); margin-bottom: 1rem; }
+  .content ul, .content ol { margin: 0.75rem 0 1rem 1.25rem; }
+  .content li { font-size: 0.9rem; line-height: 1.75; color: var(--text-light); margin-bottom: 0.25rem; }
+  .content a { color: var(--blue); }
+  strong { color: var(--text); font-weight: 500; }
+
   code {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.78rem;
-    background: var(--blue-light);
-    color: var(--blue);
-    padding: 0.1rem 0.4rem;
-    border-radius: 4px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem;
+    background: var(--blue-light); color: var(--blue);
+    padding: 0.1rem 0.4rem; border-radius: 4px;
   }
 
   .callout {
-    border-left: 3px solid var(--blue);
-    background: var(--blue-light);
-    padding: 1rem 1.25rem;
-    border-radius: 0 8px 8px 0;
-    margin: 1.25rem 0;
+    border-left: 3px solid var(--blue); background: var(--blue-light);
+    padding: 1rem 1.25rem; border-radius: 0 8px 8px 0; margin: 1.25rem 0;
   }
   .callout.warning { border-color: #e67e22; background: #fef3e2; }
   .callout.success { border-color: var(--green); background: var(--green-light); }
   .callout p { margin: 0; font-size: 0.875rem; }
-  .callout strong { font-weight: 500; }
 
-  .color-swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.12); vertical-align: middle; margin-right: 6px; }
+  .color-swatch {
+    display: inline-block; width: 12px; height: 12px;
+    border-radius: 3px; border: 1px solid rgba(0,0,0,0.12);
+    vertical-align: middle; margin-right: 6px;
+  }
 
+  /* FOOTER */
   footer { position: relative; z-index: 1; background: var(--text); color: rgba(255,255,255,0.6); padding: 2.5rem 2rem; }
   .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
   .footer-brand { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; color: white; }
@@ -177,14 +164,14 @@
 
   @media (max-width: 768px) {
     .page-layout { grid-template-columns: 1fr; }
-    .toc { position: static; }
+    .toc-sidebar { position: static; }
     .nav-links { display: none; }
   }
 </style>
 </head>
 <body>
 
-<nav>
+<nav class="topnav">
   <a class="nav-brand" href="index.html">
     <img src="icon1024.png" alt="ExcelLink for Revit">
     <span><b>ExcelLink</b> <em>for Revit</em></span>
@@ -198,17 +185,18 @@
 </nav>
 
 <div class="page-layout">
+
   <!-- TOC SIDEBAR -->
-  <div class="toc-wrap"><nav class="toc" aria-label="Table of contents">
-    <div class="toc-title">Contents</div>
-    <ul>
+  <aside class="toc-sidebar">
+    <div class="toc-header">Contents</div>
+    <ul class="toc-list">
       <li><a href="#installation">Installation</a></li>
       <li><a href="#trial">Trial Mode</a></li>
       <li><a href="#activation">License Activation</a></li>
       <li><a href="#export">Exporting Parameters</a></li>
-      <div class="toc-sub"><li><a href="#export-categories">Selecting Categories</a></li></div>
-      <div class="toc-sub"><li><a href="#export-params">Selecting Parameters</a></li></div>
-      <div class="toc-sub"><li><a href="#export-run">Running the Export</a></li></div>
+      <li class="sub"><a href="#export-categories">Selecting Categories</a></li>
+      <li class="sub"><a href="#export-params">Selecting Parameters</a></li>
+      <li class="sub"><a href="#export-run">Running the Export</a></li>
       <li><a href="#excel">Working in Excel</a></li>
       <li><a href="#color">Cell Color Coding</a></li>
       <li><a href="#import">Importing Back to Revit</a></li>
@@ -217,7 +205,7 @@
       <li><a href="#limitations">Known Limitations</a></li>
       <li><a href="#support">Support</a></li>
     </ul>
-  </nav></div>
+  </aside>
 
   <!-- MAIN CONTENT -->
   <article class="content">
@@ -250,7 +238,7 @@
       <li>ExcelLink will validate the key online. An internet connection is required for the initial activation.</li>
     </ol>
     <p>Once activated, ExcelLink works offline for up to <strong>30 days</strong> between license checks. This covers use on construction sites and in environments with limited connectivity.</p>
-    <p>To purchase a license, contact: <a href="/cdn-cgi/l/email-protection#402128353a352e253200272d21292c6e232f2d"><span class="__cf_email__" data-cfemail="fa9b928f808f949f88ba9d979b9396d4999597">[email&#160;protected]</span></a></p>
+    <p>To purchase a license, contact: <a href="mailto:ahuzuner@gmail.com">ahuzuner@gmail.com</a></p>
 
     <h2 id="export">Exporting Parameters</h2>
 
@@ -258,7 +246,7 @@
     <p>Open ExcelLink from the Add-ins ribbon. The left panel lists all Revit categories that contain elements in the current model. Each category shows the number of elements it contains.</p>
     <ul>
       <li>Check one or more categories to include them in the export.</li>
-      <li>Enable <strong>Include Linked Documents</strong> to also count and export elements from loaded Revit link files.</li>
+      <li>Enable <strong>Include Linked Documents</strong> to also export elements from loaded Revit link files.</li>
       <li>Enable <strong>Include Type Parameters</strong> to include family type parameters alongside instance parameters.</li>
     </ul>
 
@@ -284,8 +272,8 @@
     <p>ExcelLink uses background colors to communicate parameter status at a glance:</p>
     <ul>
       <li><span class="color-swatch" style="background:#ffffff; border-color:#ccc;"></span><strong>White</strong> — Writable instance parameter. You can edit this cell.</li>
-      <li><span class="color-swatch" style="background:#ffb6c1;"></span><strong>Light Pink</strong> — Read-only parameter. The value is shown for reference but cannot be written back.</li>
-      <li><span class="color-swatch" style="background:#fffacd;"></span><strong>Light Yellow</strong> — Type parameter. Affects all instances of the same family type. Exported for reference only.</li>
+      <li><span class="color-swatch" style="background:#ffb6c1;"></span><strong>Light Pink</strong> — Read-only parameter. Shown for reference, cannot be written back.</li>
+      <li><span class="color-swatch" style="background:#fffacd;"></span><strong>Light Yellow</strong> — Type parameter. Affects all instances of the same family type. Reference only.</li>
       <li><span class="color-swatch" style="background:#b22222;"></span><strong>Brick Red</strong> — The parameter does not exist on this particular element.</li>
       <li><span class="color-swatch" style="background:#d3d3d3;"></span><strong>Light Gray</strong> — Element belongs to a linked document. Cannot be imported back.</li>
     </ul>
@@ -328,8 +316,9 @@
 
     <h2 id="support">Support</h2>
     <p>For bug reports, feature requests, or license inquiries, please contact:</p>
-    <p><a href="/cdn-cgi/l/email-protection#402128353a352e253200272d21292c6e232f2d"><span class="__cf_email__" data-cfemail="76171e030c0318130436111b171f1a5815191b">[email&#160;protected]</span></a></p>
+    <p><a href="mailto:ahuzuner@gmail.com">ahuzuner@gmail.com</a></p>
   </article>
+
 </div>
 
 <footer>
@@ -339,12 +328,25 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="release-notes.html">Release Notes</a></li>
       <li><a href="privacy-policy.html">Privacy Policy</a></li>
-      <li><a href="/cdn-cgi/l/email-protection#d3b2bba6a9a6bdb6a193b4beb2babffdb0bcbe"><span class="__cf_email__" data-cfemail="e988819c939c878c9ba98e84888085c78a8684">[email&#160;protected]</span></a></li>
+      <li><a href="mailto:ahuzuner@gmail.com">ahuzuner@gmail.com</a></li>
     </ul>
     <div class="footer-copy">© 2026 Haluk Uzuner</div>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Scroll spy for TOC
-  const sections = document.quer
+<script>
+  const sections = document.querySelectorAll('article [id]');
+  const links = document.querySelectorAll('.toc-list a');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(a => a.classList.remove('active'));
+        const a = document.querySelector(`.toc-list a[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
