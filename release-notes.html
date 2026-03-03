@@ -3,852 +3,131 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ExcelLink for Revit — Bidirectional Parameter Exchange</title>
-<meta name="description" content="Export Revit element parameters to Excel and write updated values back. Compatible with Revit 2022–2026.">
+<title>Release Notes — ExcelLink for Revit</title>
 <link rel="icon" type="image/png" href="icon1024.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --blue: #1B5EA6;
-    --blue-dark: #0f3d73;
-    --blue-light: #d6e4f7;
-    --green: #1D6F42;
-    --green-light: #d4edda;
-    --gray: #8a9aaa;
-    --grid: #c8d8e8;
-    --bg: #f4f7fb;
-    --white: #ffffff;
-    --text: #1a2332;
-    --text-light: #4a5a6a;
-    --border: #dde6f0;
+    --blue: #1B5EA6; --blue-dark: #0f3d73; --blue-light: #d6e4f7;
+    --green: #1D6F42; --green-light: #d4edda;
+    --gray: #8a9aaa; --grid: #c8d8e8; --bg: #f4f7fb; --white: #ffffff;
+    --text: #1a2332; --text-light: #4a5a6a; --border: #dde6f0;
   }
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'IBM Plex Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    overflow-x: hidden;
-  }
-
-  /* GRID BACKGROUND */
+  body { font-family: 'IBM Plex Sans', sans-serif; background: var(--bg); color: var(--text); }
   body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(var(--grid) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-    background-size: 40px 40px;
-    opacity: 0.35;
-    pointer-events: none;
-    z-index: 0;
+    content: ''; position: fixed; inset: 0;
+    background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 40px 40px; opacity: 0.35; pointer-events: none; z-index: 0;
   }
-
-  /* NAV */
   nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(244,247,251,0.92);
-    backdrop-filter: blur(12px);
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(244,247,251,0.92); backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
-    padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 64px;
+    padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px;
   }
-
-  .nav-brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    color: var(--text);
-  }
-
-  .nav-brand img {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-  }
-
-  .nav-brand span {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1.05rem;
-    letter-spacing: -0.02em;
-  }
-
+  .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
+  .nav-brand img { width: 36px; height: 36px; border-radius: 8px; }
+  .nav-brand span { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem; letter-spacing: -0.02em; }
   .nav-brand span b { color: var(--blue); }
   .nav-brand span em { color: var(--green); font-style: normal; }
-
-  .nav-links {
-    display: flex;
-    gap: 0.25rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.75rem;
-    font-weight: 500;
-    text-decoration: none;
-    color: var(--text-light);
-    padding: 0.4rem 0.8rem;
-    border-radius: 6px;
-    transition: all 0.15s;
-    letter-spacing: 0.02em;
-  }
-
+  .nav-links { display: flex; gap: 0.25rem; list-style: none; }
+  .nav-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; font-weight: 500; text-decoration: none; color: var(--text-light); padding: 0.4rem 0.8rem; border-radius: 6px; transition: all 0.15s; }
   .nav-links a:hover { background: var(--blue-light); color: var(--blue); }
   .nav-links a.active { background: var(--blue); color: white; }
 
-  /* HERO */
-  .hero {
-    position: relative;
-    z-index: 1;
-    min-height: 88vh;
-    display: flex;
-    align-items: center;
-    padding: 6rem 2rem 4rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 4rem;
-  }
+  .page-wrap { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding: 4rem 2rem 6rem; }
 
-  .hero-text { flex: 1; }
+  h1 { font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
+  .subtitle { font-size: 1rem; color: var(--text-light); font-weight: 300; margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
 
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--green-light);
-    color: var(--green);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
-    font-weight: 500;
-    padding: 0.35rem 0.75rem;
-    border-radius: 20px;
-    margin-bottom: 1.5rem;
-    letter-spacing: 0.05em;
-    border: 1px solid rgba(29,111,66,0.2);
-  }
-
-  .hero-badge::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--green);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
-
-  .hero h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 800;
-    font-stretch: condensed;
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    margin-bottom: 1.5rem;
-  }
-
-  .hero h1 .blue { color: var(--blue); }
-  .hero h1 .green { color: var(--green); }
-
-  .hero p {
-    font-size: 1.1rem;
-    font-weight: 300;
-    color: var(--text-light);
-    line-height: 1.7;
-    max-width: 520px;
-    margin-bottom: 2.5rem;
-  }
-
-  .hero-cta {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.8rem;
-    font-weight: 500;
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: all 0.2s;
-    letter-spacing: 0.02em;
-    cursor: pointer;
-    border: none;
-  }
-
-  .btn-primary {
-    background: var(--blue);
-    color: white;
-    box-shadow: 0 4px 16px rgba(27,94,166,0.3);
-  }
-
-  .btn-primary:hover {
-    background: var(--blue-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(27,94,166,0.4);
-  }
-
-  .btn-outline {
-    background: transparent;
-    color: var(--blue);
-    border: 1.5px solid var(--blue);
-  }
-
-  .btn-outline:hover {
-    background: var(--blue-light);
-    transform: translateY(-2px);
-  }
-
-  /* HERO ICON */
-  .hero-visual {
-    flex-shrink: 0;
-    position: relative;
-  }
-
-  .hero-icon-wrap {
-    position: relative;
-    width: 280px;
-    height: 280px;
-  }
-
-  .hero-icon-wrap::before {
-    content: '';
-    position: absolute;
-    inset: -20px;
-    background: radial-gradient(circle, rgba(27,94,166,0.12) 0%, transparent 70%);
-    border-radius: 50%;
-    animation: glow 3s ease-in-out infinite alternate;
-  }
-
-  @keyframes glow {
-    from { transform: scale(0.95); opacity: 0.6; }
-    to { transform: scale(1.05); opacity: 1; }
-  }
-
-  .hero-icon-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 32px;
-    box-shadow: 0 24px 64px rgba(27,94,166,0.2), 0 4px 16px rgba(0,0,0,0.1);
-    position: relative;
-    z-index: 1;
-  }
-
-  .version-tag {
-    position: absolute;
-    bottom: -12px;
-    right: -12px;
-    background: var(--green);
-    color: white;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
-    font-weight: 500;
-    padding: 0.3rem 0.7rem;
-    border-radius: 20px;
-    z-index: 2;
-    box-shadow: 0 4px 12px rgba(29,111,66,0.4);
-  }
-
-  /* COMPAT STRIP */
-  .compat-strip {
-    position: relative;
-    z-index: 1;
-    background: var(--white);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding: 1.25rem 2rem;
-  }
-
-  .compat-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-
-  .compat-label {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--gray);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-
-  .compat-tags {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
-
-  .compat-tag {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
-    font-weight: 500;
-    padding: 0.25rem 0.65rem;
-    border-radius: 4px;
-    background: var(--blue-light);
-    color: var(--blue);
-    border: 1px solid rgba(27,94,166,0.15);
-  }
-
-  /* FEATURES */
-  .section {
-    position: relative;
-    z-index: 1;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 5rem 2rem;
-  }
-
-  .section-label {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--blue);
-    margin-bottom: 0.75rem;
-  }
-
-  .section-title {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(1.8rem, 3vw, 2.5rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin-bottom: 3rem;
-    line-height: 1.1;
-  }
-
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .feature-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.75rem;
-    transition: all 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .feature-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--blue), var(--green));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s;
-  }
-
-  .feature-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(27,94,166,0.12);
-    border-color: var(--blue-light);
-  }
-
-  .feature-card:hover::before { transform: scaleX(1); }
-
-  .feature-icon {
-    font-size: 1.75rem;
-    margin-bottom: 1rem;
-    display: block;
-  }
-
-  .feature-card h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.01em;
-  }
-
-  .feature-card p {
-    font-size: 0.875rem;
-    color: var(--text-light);
-    line-height: 1.6;
-  }
-
-  /* HOW IT WORKS */
-  .steps-wrap {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-  }
-
-  .step {
-    display: flex;
-    align-items: flex-start;
-    gap: 2rem;
-    padding: 2rem 2.5rem;
-    border-bottom: 1px solid var(--border);
-    transition: background 0.15s;
-  }
-
-  .step:last-child { border-bottom: none; }
-  .step:hover { background: var(--bg); }
-
-  .step-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--blue-light);
-    line-height: 1;
-    flex-shrink: 0;
-    width: 48px;
-    text-align: center;
-  }
-
-  .step-content h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 700;
-    margin-bottom: 0.4rem;
-  }
-
-  .step-content p {
-    font-size: 0.875rem;
-    color: var(--text-light);
-    line-height: 1.6;
-  }
-
-  .step-content code {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.78rem;
-    background: var(--blue-light);
-    color: var(--blue);
-    padding: 0.1rem 0.4rem;
-    border-radius: 4px;
-  }
-
-  /* COLOR CODING */
-  .color-table {
+  .release {
     background: var(--white);
     border: 1px solid var(--border);
     border-radius: 12px;
     overflow: hidden;
-    width: 100%;
-    border-collapse: collapse;
+    margin-bottom: 2rem;
   }
 
-  .color-table th {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--gray);
-    padding: 1rem 1.5rem;
-    text-align: left;
+  .release-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
     border-bottom: 1px solid var(--border);
     background: var(--bg);
   }
 
-  .color-table td {
-    padding: 0.85rem 1.5rem;
-    font-size: 0.875rem;
-    border-bottom: 1px solid var(--border);
-    color: var(--text-light);
-  }
-
-  .color-table tr:last-child td { border-bottom: none; }
-
-  .color-swatch {
-    display: inline-block;
-    width: 14px; height: 14px;
-    border-radius: 3px;
-    border: 1px solid rgba(0,0,0,0.1);
-    vertical-align: middle;
-    margin-right: 8px;
-  }
-
-  /* TRIAL BOX */
-  .trial-box {
-    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
-    border-radius: 16px;
-    padding: 3rem;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    flex-wrap: wrap;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .trial-box::before {
-    content: '';
-    position: absolute;
-    top: -40px; right: -40px;
-    width: 200px; height: 200px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 50%;
-  }
-
-  .trial-box::after {
-    content: '';
-    position: absolute;
-    bottom: -60px; right: 60px;
-    width: 140px; height: 140px;
-    background: rgba(255,255,255,0.04);
-    border-radius: 50%;
-  }
-
-  .trial-box h2 {
+  .release-version {
     font-family: 'Syne', sans-serif;
-    font-size: 1.75rem;
-    font-weight: 800;
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.02em;
-  }
-
-  .trial-box p {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    max-width: 420px;
-    line-height: 1.6;
-  }
-
-  .btn-white {
-    background: white;
-    color: var(--blue);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.8rem;
-    font-weight: 500;
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.2s;
-    white-space: nowrap;
-  }
-
-  .btn-white:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-  }
-
-
-  /* PRICING */
-  .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.25rem;
-  }
-
-  .pricing-card {
-    background: var(--white);
-    border: 1.5px solid var(--border);
-    border-radius: 14px;
-    padding: 2rem 1.75rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    transition: all 0.2s;
-    position: relative;
-  }
-
-  .pricing-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(27,94,166,0.12);
-  }
-
-  .pricing-card.popular {
-    border-color: var(--blue);
-    box-shadow: 0 4px 24px rgba(27,94,166,0.15);
-  }
-
-  .popular-badge {
-    position: absolute;
-    top: -12px; left: 50%; transform: translateX(-50%);
-    background: var(--blue);
-    color: white;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.62rem;
-    font-weight: 500;
-    padding: 0.2rem 0.75rem;
-    border-radius: 20px;
-    letter-spacing: 0.06em;
-    white-space: nowrap;
-  }
-
-  .pricing-name {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     font-weight: 800;
     letter-spacing: -0.02em;
   }
 
-  .pricing-scope {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--gray);
-    margin-top: -0.75rem;
-  }
-
-  .pricing-price {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .price-monthly {
-    display: flex;
-    align-items: baseline;
-    gap: 3px;
-  }
-
-  .price-amount {
-    font-family: 'Syne', sans-serif;
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--text);
-    letter-spacing: -0.03em;
-  }
-
-  .price-currency {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.85rem;
-    color: var(--text-light);
-    align-self: flex-start;
-    margin-top: 0.4rem;
-  }
-
-  .price-period {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--gray);
-  }
-
-  .price-annual {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--green);
-    font-weight: 500;
-  }
-
-  .pricing-divider {
-    height: 1px;
-    background: var(--border);
-  }
-
-  .pricing-features {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    flex: 1;
-  }
-
-  .pricing-features li {
-    font-size: 0.825rem;
-    color: var(--text-light);
+  .release-meta {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.75rem;
   }
 
-  .pricing-features li::before {
-    content: '✓';
-    color: var(--green);
-    font-weight: 700;
-    font-size: 0.75rem;
-    flex-shrink: 0;
-  }
-
-  .pricing-cta {
-    display: block;
-    text-align: center;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.78rem;
-    font-weight: 500;
-    padding: 0.65rem 1rem;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: all 0.2s;
-    letter-spacing: 0.02em;
-  }
-
-  .pricing-cta-outline {
-    border: 1.5px solid var(--blue);
-    color: var(--blue);
-  }
-
-  .pricing-cta-outline:hover {
-    background: var(--blue-light);
-  }
-
-  .pricing-cta-filled {
-    background: var(--blue);
-    color: white;
-    box-shadow: 0 4px 12px rgba(27,94,166,0.3);
-  }
-
-  .pricing-cta-filled:hover {
-    background: var(--blue-dark);
-    transform: translateY(-1px);
-  }
-
-  .pricing-contact {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.75rem;
-    font-weight: 800;
-    color: var(--text);
-  }
-
-  .billing-toggle {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 2.5rem;
-  }
-
-  .billing-label {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--text-light);
-    cursor: pointer;
-    transition: color 0.15s;
-  }
-
-  .billing-label.active {
-    color: var(--text);
-    font-weight: 500;
-  }
-
-  .toggle-track {
-    width: 44px; height: 24px;
-    background: var(--blue);
-    border-radius: 12px;
-    position: relative;
-    cursor: pointer;
-    transition: background 0.2s;
-    flex-shrink: 0;
-  }
-
-  .toggle-thumb {
-    width: 18px; height: 18px;
-    background: white;
-    border-radius: 50%;
-    position: absolute;
-    top: 3px; left: 3px;
-    transition: transform 0.2s;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-  }
-
-  .toggle-track.annual .toggle-thumb {
-    transform: translateX(20px);
-  }
-
-  .save-badge {
+  .badge {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.65rem;
-    background: var(--green-light);
-    color: var(--green);
-    padding: 0.2rem 0.5rem;
-    border-radius: 20px;
     font-weight: 500;
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
   }
 
-  /* FOOTER */
-  footer {
-    position: relative;
-    z-index: 1;
-    background: var(--text);
-    color: rgba(255,255,255,0.6);
-    padding: 2.5rem 2rem;
-  }
+  .badge-initial { background: var(--blue); color: white; }
+  .badge-date { background: var(--bg); color: var(--gray); border: 1px solid var(--border); }
 
-  .footer-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
+  .release-body { padding: 1.75rem 2rem; }
 
-  .footer-brand {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: white;
-  }
+  .change-group { margin-bottom: 1.5rem; }
+  .change-group:last-child { margin-bottom: 0; }
 
-  .footer-links {
-    display: flex;
-    gap: 1.5rem;
-    list-style: none;
-    flex-wrap: wrap;
-  }
-
-  .footer-links a {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.5);
-    text-decoration: none;
-    letter-spacing: 0.03em;
-    transition: color 0.15s;
-  }
-
-  .footer-links a:hover { color: white; }
-
-  .footer-copy {
+  .change-group h3 {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.68rem;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
   }
 
-  /* DIVIDER */
-  .section-divider {
+  .change-group.new h3 { color: var(--green); }
+  .change-group.improved h3 { color: var(--blue); }
+  .change-group.fixed h3 { color: #c0392b; }
+
+  .change-group ul { list-style: none; }
+  .change-group li {
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: var(--text-light);
+    padding: 0.3rem 0;
+    padding-left: 1.25rem;
     position: relative;
-    z-index: 1;
-    height: 1px;
-    background: var(--border);
-    max-width: 1200px;
-    margin: 0 auto;
   }
 
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    .hero { flex-direction: column-reverse; gap: 2rem; min-height: auto; padding-top: 4rem; }
-    .hero-icon-wrap { width: 180px; height: 180px; }
-    .nav-links { display: none; }
-    .step { flex-direction: column; gap: 0.75rem; }
-    .trial-box { flex-direction: column; }
-  }
+  .change-group.new li::before { content: '+'; position: absolute; left: 0; color: var(--green); font-weight: 700; font-family: 'IBM Plex Mono', monospace; }
+  .change-group.improved li::before { content: '↑'; position: absolute; left: 0; color: var(--blue); font-weight: 700; font-family: 'IBM Plex Mono', monospace; }
+  .change-group.fixed li::before { content: '✓'; position: absolute; left: 0; color: #c0392b; font-weight: 700; font-family: 'IBM Plex Mono', monospace; }
+
+  code { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; background: var(--blue-light); color: var(--blue); padding: 0.1rem 0.4rem; border-radius: 4px; }
+
+  footer { position: relative; z-index: 1; background: var(--text); color: rgba(255,255,255,0.6); padding: 2.5rem 2rem; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .footer-brand { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; color: white; }
+  .footer-links { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
+  .footer-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.15s; }
+  .footer-links a:hover { color: white; }
+  .footer-copy { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; }
+
+  @media (max-width: 768px) { .nav-links { display: none; } .release-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; } }
 </style>
 </head>
 <body>
@@ -859,334 +138,64 @@
     <span><b>ExcelLink</b> <em>for Revit</em></span>
   </a>
   <ul class="nav-links">
-    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="index.html">Home</a></li>
     <li><a href="user-guide.html">User Guide</a></li>
-    <li><a href="release-notes.html">Release Notes</a></li>
+    <li><a href="release-notes.html" class="active">Release Notes</a></li>
     <li><a href="privacy-policy.html">Privacy Policy</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-text">
-    <div class="hero-badge">Autodesk App Store — v1.0</div>
-    <h1>
-      Revit parameters,<br>
-      <span class="blue">exported</span> and<br>
-      <span class="green">written back.</span>
-    </h1>
-    <p>ExcelLink for Revit enables bidirectional parameter exchange between Autodesk Revit and Microsoft Excel. Export any element parameter to a structured spreadsheet, edit values, and import changes back — all without leaving Revit.</p>
-    <div class="hero-cta">
-      <a href="user-guide.html" class="btn btn-primary">→ User Guide</a>
-      <a href="/cdn-cgi/l/email-protection#67060f121d1209021527000a060e0b4904080a" class="btn btn-outline">Contact</a>
-    </div>
-  </div>
-  <div class="hero-visual">
-    <div class="hero-icon-wrap">
-      <img src="icon1024.png" alt="ExcelLink for Revit icon">
-      <span class="version-tag">v1.0</span>
-    </div>
-  </div>
-</section>
+<div class="page-wrap">
+  <h1>Release Notes</h1>
+  <p class="subtitle">Version history for ExcelLink for Revit</p>
 
-<!-- COMPAT STRIP -->
-<div class="compat-strip">
-  <div class="compat-inner">
-    <span class="compat-label">Compatible with</span>
-    <div class="compat-tags">
-      <span class="compat-tag">Revit 2022</span>
-      <span class="compat-tag">Revit 2023</span>
-      <span class="compat-tag">Revit 2024</span>
-      <span class="compat-tag">Revit 2025</span>
-      <span class="compat-tag">Revit 2026</span>
+  <!-- v1.0 -->
+  <div class="release">
+    <div class="release-header">
+      <div class="release-version">Version 1.0</div>
+      <div class="release-meta">
+        <span class="badge badge-initial">Initial Release</span>
+        <span class="badge badge-date">March 2026</span>
+      </div>
     </div>
-    <span class="compat-label" style="margin-left:auto;">Windows 10 / 11 · .xlsx output</span>
+    <div class="release-body">
+
+      <div class="change-group new">
+        <h3>New</h3>
+        <ul>
+          <li>Export Revit element parameters to <code>.xlsx</code> with per-category or single-sheet output.</li>
+          <li>Import updated values back to Revit in a single transaction using element Unique IDs for matching.</li>
+          <li>Support for Revit 2022, 2023, 2024, 2025, and 2026.</li>
+          <li>Linked document support — export parameters from loaded Revit link instances.</li>
+          <li>Include or exclude type parameters on a per-export basis.</li>
+          <li>Drag-and-drop parameter column reordering before export.</li>
+          <li>Save and load export configuration to a <code>.json</code> file for reuse.</li>
+          <li>Cell color coding: white (writable), pink (read-only), yellow (type), red (missing), gray (linked).</li>
+          <li>Trial mode with 10-element export limit per category — no registration required.</li>
+          <li>Online license activation with 30-day offline grace period.</li>
+          <li>Shared parameter matching via GUID; built-in parameter matching via internal ID — reliable across model transfers.</li>
+          <li>Double values always exported with <code>InvariantCulture</code> decimal format (period separator) regardless of system locale.</li>
+          <li>Floating-point precision rounding to 6 decimal places eliminates unit conversion noise (e.g. 6920 mm roundtrips cleanly).</li>
+        </ul>
+      </div>
+
+    </div>
   </div>
+
 </div>
 
-<!-- FEATURES -->
-<div class="section">
-  <div class="section-label">Features</div>
-  <div class="section-title">Everything you need for<br>parameter management</div>
-  <div class="features-grid">
-    <div class="feature-card">
-      <span class="feature-icon">⇄</span>
-      <h3>Bidirectional Exchange</h3>
-      <p>Export parameters to Excel with full metadata, edit values in a familiar spreadsheet environment, then import changes back into the model in a single operation.</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">🔗</span>
-      <h3>Linked Document Support</h3>
-      <p>Read parameters from linked Revit files alongside host model elements. Linked elements are clearly marked in the exported spreadsheet.</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">⚡</span>
-      <h3>Multi-Category Export</h3>
-      <p>Select one or more categories, choose which parameters to include, and export everything to a single workbook — either one sheet per category or a unified sheet.</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">🎯</span>
-      <h3>Smart Parameter Matching</h3>
-      <p>Parameters are matched by GUID for shared parameters and by internal ID for built-in parameters, ensuring reliable roundtrips even with similarly named parameters.</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">💾</span>
-      <h3>Save &amp; Load Configuration</h3>
-      <p>Save your category and parameter selections for each project. Load the same configuration next time to instantly repeat the same export.</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">🔒</span>
-      <h3>Safe Import</h3>
-      <p>Read-only and type parameters are exported for reference but never written back. Color coding clearly indicates which cells are writable before you start.</p>
-    </div>
-  </div>
-</div>
-
-<div class="section-divider"></div>
-
-<!-- HOW IT WORKS -->
-<div class="section">
-  <div class="section-label">Workflow</div>
-  <div class="section-title">Four steps to<br>a clean parameter roundtrip</div>
-  <div class="steps-wrap">
-    <div class="step">
-      <div class="step-num">01</div>
-      <div class="step-content">
-        <h3>Select categories &amp; parameters</h3>
-        <p>Open ExcelLink from the Revit ribbon. Choose one or more element categories from the list, then select the parameters you want to export. Drag to reorder columns. Optionally include type parameters and linked document elements.</p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <div class="step-content">
-        <h3>Export to Excel</h3>
-        <p>Click <code>Export</code>. ExcelLink writes a structured <code>.xlsx</code> file with one row per element. Row 1 contains hidden metadata required for import. Column A holds the Unique ID used for element matching — do not modify either.</p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <div class="step-content">
-        <h3>Edit values in Excel</h3>
-        <p>Open the file in Microsoft Excel and edit the writable parameter values. White cells are editable. Pink cells are read-only, yellow cells are type parameters, and gray cells belong to linked elements.</p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">04</div>
-      <div class="step-content">
-        <h3>Import back to Revit</h3>
-        <p>Return to Revit, open ExcelLink, and click <code>Import</code>. Select the saved file. ExcelLink matches each row to its element by Unique ID and writes the updated values back in a single transaction.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="section-divider"></div>
-
-<!-- COLOR CODING -->
-<div class="section">
-  <div class="section-label">Reference</div>
-  <div class="section-title">Cell color coding</div>
-  <table class="color-table">
-    <thead>
-      <tr>
-        <th>Color</th>
-        <th>Meaning</th>
-        <th>Importable?</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="color-swatch" style="background:#ffffff; border-color:#ccc;"></span>White</td>
-        <td>Writable instance parameter with a value</td>
-        <td>✓ Yes</td>
-      </tr>
-      <tr>
-        <td><span class="color-swatch" style="background:#ffb6c1;"></span>Light Pink</td>
-        <td>Read-only parameter — cannot be written back to Revit</td>
-        <td>✗ No</td>
-      </tr>
-      <tr>
-        <td><span class="color-swatch" style="background:#fffacd;"></span>Light Yellow</td>
-        <td>Type parameter — affects all instances of the same family type</td>
-        <td>✗ No</td>
-      </tr>
-      <tr>
-        <td><span class="color-swatch" style="background:#b22222;"></span>Brick Red</td>
-        <td>Parameter does not exist on this particular element</td>
-        <td>✗ No</td>
-      </tr>
-      <tr>
-        <td><span class="color-swatch" style="background:#d3d3d3;"></span>Light Gray</td>
-        <td>Element belongs to a linked document</td>
-        <td>✗ No</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="section-divider"></div>
-
-<!-- PRICING -->
-<div class="section-divider"></div>
-<div class="section">
-  <div class="section-label">Pricing</div>
-  <div class="section-title">Simple, transparent pricing</div>
-
-  <div class="billing-toggle" id="billingToggle">
-    <span class="billing-label active" id="labelMonthly">Monthly</span>
-    <div class="toggle-track" id="toggleTrack" onclick="switchBilling()">
-      <div class="toggle-thumb"></div>
-    </div>
-    <span class="billing-label" id="labelAnnual">Annual</span>
-    <span class="save-badge">Save 17%</span>
-  </div>
-
-  <div class="pricing-grid">
-
-    <!-- PERSONAL -->
-    <div class="pricing-card">
-      <div>
-        <div class="pricing-name">Personal</div>
-        <div class="pricing-scope">1 user · 1 computer</div>
-      </div>
-      <div class="pricing-price">
-        <div class="price-monthly">
-          <span class="price-currency">$</span>
-          <span class="price-amount" id="price-personal">2.99</span>
-        </div>
-        <div class="price-period" id="period-personal">per month</div>
-        <div class="price-annual" id="annual-personal" style="display:none">$29.90 / year — 2 months free</div>
-      </div>
-      <div class="pricing-divider"></div>
-      <ul class="pricing-features">
-        <li>1 named user</li>
-        <li>1 computer</li>
-        <li>All export &amp; import features</li>
-        <li>Revit 2022–2026</li>
-        <li>30-day offline grace period</li>
-        <li>Email support</li>
-      </ul>
-      <a href="/cdn-cgi/l/email-protection#96f7fee3ece3f8f3e4d6f1fbf7fffab8f5f9fba9e5e3f4fcf3f5e2abd3eef5f3fadafff8fdb6c6f3e4e5f9f8f7fab6dafff5f3f8e5f3" class="pricing-cta pricing-cta-outline">Get Personal →</a>
-    </div>
-
-    <!-- PROFESSIONAL -->
-    <div class="pricing-card popular">
-      <div class="popular-badge">MOST POPULAR</div>
-      <div>
-        <div class="pricing-name">Professional</div>
-        <div class="pricing-scope">1 user · 2 computers</div>
-      </div>
-      <div class="pricing-price">
-        <div class="price-monthly">
-          <span class="price-currency">$</span>
-          <span class="price-amount" id="price-professional">3.99</span>
-        </div>
-        <div class="price-period" id="period-professional">per month</div>
-        <div class="price-annual" id="annual-professional" style="display:none">$39.90 / year — 2 months free</div>
-      </div>
-      <div class="pricing-divider"></div>
-      <ul class="pricing-features">
-        <li>1 named user</li>
-        <li>2 computers (office + home)</li>
-        <li>All export &amp; import features</li>
-        <li>Revit 2022–2026</li>
-        <li>30-day offline grace period</li>
-        <li>Email support</li>
-      </ul>
-      <a href="/cdn-cgi/l/email-protection#f19099848b849f9483b1969c90989ddf929e9cce8284939b949285ccb48992949dbd989f9ad1a1839e97948282989e9f909dd1bd9892949f8294" class="pricing-cta pricing-cta-filled">Get Professional →</a>
-    </div>
-
-    <!-- TEAM -->
-    <div class="pricing-card">
-      <div>
-        <div class="pricing-name">Team</div>
-        <div class="pricing-scope">Up to 5 users</div>
-      </div>
-      <div class="pricing-price">
-        <div class="price-monthly">
-          <span class="price-currency">$</span>
-          <span class="price-amount" id="price-team">12.45</span>
-        </div>
-        <div class="price-period" id="period-team">per month</div>
-        <div class="price-annual" id="annual-team" style="display:none">$124.50 / year — 2 months free</div>
-      </div>
-      <div class="pricing-divider"></div>
-      <ul class="pricing-features">
-        <li>5 Personal licenses</li>
-        <li>$2.49 / user / month</li>
-        <li>All export &amp; import features</li>
-        <li>Revit 2022–2026</li>
-        <li>30-day offline grace period</li>
-        <li>Priority email support</li>
-      </ul>
-      <a href="/cdn-cgi/l/email-protection#caaba2bfb0bfa4afb88aada7aba3a6e4a9a5a7f5b9bfa8a0afa9bef78fb2a9afa686a3a4a1ea9eafaba7ea86a3a9afa4b9af" class="pricing-cta pricing-cta-outline">Get Team →</a>
-    </div>
-
-    <!-- ENTERPRISE -->
-    <div class="pricing-card">
-      <div>
-        <div class="pricing-name">Enterprise</div>
-        <div class="pricing-scope">10+ users</div>
-      </div>
-      <div class="pricing-price">
-        <div class="pricing-contact">Contact us</div>
-        <div class="price-period">custom pricing</div>
-      </div>
-      <div class="pricing-divider"></div>
-      <ul class="pricing-features">
-        <li>10+ Personal licenses</li>
-        <li>Volume discount on request</li>
-        <li>All export &amp; import features</li>
-        <li>Revit 2022–2026</li>
-        <li>30-day offline grace period</li>
-        <li>Dedicated support</li>
-      </ul>
-      <a href="/cdn-cgi/l/email-protection#cdaca5b8b7b8a3a8bf8daaa0aca4a1e3aea2a0f2beb8afa7a8aeb9f088b5aea8a181a4a3a6ed88a3b9a8bfbdbfa4bea8ed81a4aea8a3bea8" class="pricing-cta pricing-cta-outline">Contact →</a>
-    </div>
-
-  </div>
-</div>
-
-<!-- TRIAL / CTA -->
-<div class="section">
-  <div class="trial-box">
-    <div>
-      <h2>Try it free</h2>
-      <p>ExcelLink for Revit includes a built-in trial mode. Export up to 10 elements per category with no registration required. Purchase a license to remove all limits.</p>
-    </div>
-    <a href="/cdn-cgi/l/email-protection#57363f222d2239322517303a363e3b7934383a" class="btn-white">Request a license →</a>
-  </div>
-</div>
-
-<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">ExcelLink for Revit</div>
     <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
       <li><a href="user-guide.html">User Guide</a></li>
-      <li><a href="release-notes.html">Release Notes</a></li>
       <li><a href="privacy-policy.html">Privacy Policy</a></li>
-      <li><a href="/cdn-cgi/l/email-protection#c7a6afb2bdb2a9a2b587a0aaa6aeabe9a4a8aa"><span class="__cf_email__" data-cfemail="9afbf2efe0eff4ffe8dafdf7fbf3f6b4f9f5f7">[email&#160;protected]</span></a></li>
+      <li><a href="mailto:ahuzuner@gmail.com">ahuzuner@gmail.com</a></li>
     </ul>
     <div class="footer-copy">© 2026 Haluk Uzuner</div>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  let isAnnual = false;
-  const prices = {
-    personal:     { monthly: '2.99',  annual: '2.49',  annualNote: '$29.90 / year — 2 months free' },
-    professional: { monthly: '3.99',  annual: '3.32',  annualNote: '$39.90 / year — 2 months free' },
-    team:         { monthly: '12.45', annual: '10.37', annualNote: '$124.50 / year — 2 months free' },
-  };
-
-  function switchBilling() {
-    isAnnual = !isAnnual;
-    const track = document.getElementById('toggleTrack');
-    track.classList.toggle('annual', isAnnual);
-    document.getElementById('labelMonthly').classList.toggle('active', !isAnnual);
-    document.getElementById('labelAnnual').classList.toggle('active', isAnnual);
-
-    for (const [key, val] of Object.entries(prices)) {
-      document.getElementById('price-' + key).textContent = isAnnual ? val.annual : val.monthly;
-      document.getElementById('period-' + key).te
+</body>
+</html>
