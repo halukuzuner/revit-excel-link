@@ -24,7 +24,7 @@
     background-image:
       linear-gradient(var(--grid) 1px, transparent 1px),
       linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-    background-size: 50px 30px; opacity: 0.35;
+    background-size: 40px 40px; opacity: 0.35;
     pointer-events: none; z-index: 0;
   }
 
@@ -104,8 +104,8 @@
 
   /* CONTENT */
   .content h1 {
-    font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 600;
-    letter-spacing: 0.02em; margin-bottom: 0.5rem;
+    font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 800;
+    letter-spacing: -0.03em; margin-bottom: 0.5rem;
   }
   .content .subtitle {
     font-size: 0.875rem; color: var(--text-light); font-weight: 300;
@@ -235,7 +235,7 @@
     <h2 id="contact">Contact</h2>
     <p>For privacy-related requests or questions:</p>
     <p><strong>Haluk Uzuner</strong><br>
-    <a href="mailto:ahuzuner@gmail.com">ahuzuner@gmail.com</a></p>
+    <a href="mailto:ahuzuner@gmail.com"><span class="__cf_email__" data-cfemail="1e7f766b646b707b6c5e79737f7772307d7173">[email&#160;protected]</span></a></p>
   </article>
 
 </div>
@@ -247,25 +247,13 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="user-guide.html">User Guide</a></li>
       <li><a href="release-notes.html">Release Notes</a></li>
-      <li><a href="mailto:ahuzuner@gmail.com">ahuzuner@gmail.com</a></li>
+      <li><a href="mailto:ahuzuner@gmail.com"><span class="__cf_email__" data-cfemail="02636a7778776c677042656f636b6e2c616d6f">[email&#160;protected]</span></a></li>
     </ul>
     <div class="footer-copy">© 2026 Haluk Uzuner</div>
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const sections = document.querySelectorAll('article [id]');
   const links = document.querySelectorAll('.toc-list a');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        links.forEach(a => a.classList.remove('active'));
-        const a = document.querySelector(`.toc-list a[href="#${e.target.id}"]`);
-        if (a) a.classList.add('active');
-      }
-    });
-  }, { rootMargin: '-20% 0px -70% 0px' });
-  sections.forEach(s => obs.observe(s));
-</script>
-</body>
-</html>
+  const obs = new IntersectionObserver(ent
