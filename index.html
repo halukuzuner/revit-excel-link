@@ -1159,7 +1159,7 @@
       <h2>Try it free</h2>
       <p>ExcelLink for Revit includes a built-in trial mode. Export up to 10 elements per category with no registration required. Purchase a license to remove all limits.</p>
     </div>
-    <a href="mailto:ahuzuner@gmail.com" class="btn-white">Request a license →</a>
+    <a href="mailto:ahuzuner@gmail.com?subject=ExcelLink%20License%20Request" class="btn-white">Request a license →</a>
   </div>
 </div>
 
@@ -1171,21 +1171,69 @@
       <li><a href="user-guide.html">User Guide</a></li>
       <li><a href="release-notes.html">Release Notes</a></li>
       <li><a href="privacy-policy.html">Privacy Policy</a></li>
-      <li><a href="mailto:ahuzuner@gmail.com"><span class="__cf_email__" data-cfemail="9afbf2efe0eff4ffe8dafdf7fbf3f6b4f9f5f7">[email&#160;protected]</span></a></li>
+      <li><a href="mailto:ahuzuner@gmail.com">ahuzuner@gmail.com</a></li>
     </ul>
     <div class="footer-copy">© 2026 Haluk Uzuner</div>
   </div>
 </footer>
 
 <script>
-  let isAnnual = false;
-  const prices = {
-    personal:     { monthly: '2.99',  annual: '2.49',  annualNote: '$29.90 / year — 2 months free' },
-    professional: { monthly: '3.99',  annual: '3.32',  annualNote: '$39.90 / year — 2 months free' },
-    team:         { monthly: '12.45', annual: '10.37', annualNote: '$124.50 / year — 2 months free' },
+document.addEventListener('DOMContentLoaded', function () {
+
+  // ── Billing toggle ──────────────────────────────────────────────
+  var isAnnual = false;
+
+  var prices = {
+    personal:     { monthly: '2.99',  annual: '2.49'  },
+    professional: { monthly: '3.99',  annual: '3.32'  },
+    team:         { monthly: '12.45', annual: '10.37' }
   };
 
-  function switchBilling() {
-    isAnnual = !isAnnual;
-    const track = document.getElementById('toggleTrack');
-    track.classList
+  var annualNotes = {
+    personal:     '$29.90 / year — 2 months free',
+    professional: '$39.90 / year — 2 months free',
+    team:         '$124.50 / year — 2 months free'
+  };
+
+  var track = document.getElementById('toggleTrack');
+  if (track) {
+    track.addEventListener('click', function () {
+      isAnnual = !isAnnual;
+      track.classList.toggle('annual', isAnnual);
+      document.getElementById('labelMonthly').classList.toggle('active', !isAnnual);
+      document.getElementById('labelAnnual').classList.toggle('active', isAnnual);
+
+      Object.keys(prices).forEach(function (key) {
+        var priceEl  = document.getElementById('price-'  + key);
+        var periodEl = document.getElementById('period-' + key);
+        var annualEl = document.getElementById('annual-' + key);
+        if (priceEl)  priceEl.textContent  = isAnnual ? prices[key].annual : prices[key].monthly;
+        if (periodEl) periodEl.textContent = isAnnual ? 'per month, billed annually' : 'per month';
+        if (annualEl) {
+          annualEl.textContent = annualNotes[key];
+          annualEl.style.display = isAnnual ? 'block' : 'none';
+        }
+      });
+    });
+  }
+
+  // ── Pricing CTA links — set subject based on plan ──────────────
+  var ctaMap = {
+    'Get Personal →':     'ExcelLink Personal License',
+    'Get Professional →': 'ExcelLink Professional License',
+    'Get Team →':         'ExcelLink Team License',
+    'Contact →':          'ExcelLink Enterprise License'
+  };
+
+  document.querySelectorAll('.pricing-cta').forEach(function (a) {
+    var label = a.textContent.trim();
+    if (ctaMap[label]) {
+      a.href = 'mailto:ahuzuner@gmail.com?subject=' + encodeURIComponent(ctaMap[label]);
+    }
+  });
+
+});
+</script>
+
+</body>
+</html>
