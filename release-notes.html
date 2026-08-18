@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Release Notes — ExcelLink for Autodesk® Revit®</title>
-<link rel="icon" type="image/png" href="icon1024.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -24,117 +23,51 @@
   nav {
     position: sticky; top: 0; z-index: 100;
     background: rgba(244,247,251,0.92); backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px;
+    border-bottom: 1px solid var(--border); padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between; height: 64px;
   }
   .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
-  .nav-brand img { width: 36px; height: 36px; border-radius: 8px; }
-  .nav-brand span { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.05rem; letter-spacing: -0.02em; }
+  .nav-brand span { font-weight: 700; font-size: 1.05rem; }
   .nav-brand span b { color: var(--blue); }
   .nav-brand span em { color: var(--green); font-style: normal; }
   .nav-links { display: flex; gap: 0.25rem; list-style: none; }
-  .nav-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; font-weight: 500; text-decoration: none; color: var(--text-light); padding: 0.4rem 0.8rem; border-radius: 6px; transition: all 0.15s; }
+  .nav-links a {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; font-weight: 500;
+    text-decoration: none; color: var(--text-light); padding: 0.4rem 0.8rem; border-radius: 6px;
+  }
   .nav-links a:hover { background: var(--blue-light); color: var(--blue); }
   .nav-links a.active { background: var(--blue); color: white; }
 
   .page-wrap { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding: 4rem 2rem 6rem; }
-
-  h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
+  h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
   .subtitle { font-size: 1rem; color: var(--text-light); font-weight: 300; margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
-
-  .release {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 2rem;
-  }
-
-  .release-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.5rem 2rem;
-    border-bottom: 1px solid var(--border);
-    background: var(--bg);
-  }
-
-  .release-version {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1.3rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-  }
-
-  .release-meta {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .badge {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.65rem;
-    font-weight: 500;
-    padding: 0.25rem 0.6rem;
-    border-radius: 20px;
-    letter-spacing: 0.05em;
-  }
-
+  .release { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 2rem; }
+  .release-header { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem; border-bottom: 1px solid var(--border); background: var(--bg); }
+  .release-version { font-size: 1.3rem; font-weight: 800; }
+  .release-meta { display: flex; align-items: center; gap: 0.75rem; }
+  .badge { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; padding: 0.25rem 0.6rem; border-radius: 20px; }
   .badge-initial { background: var(--blue); color: white; }
   .badge-date { background: var(--bg); color: var(--gray); border: 1px solid var(--border); }
-
   .release-body { padding: 1.75rem 2rem; }
-
-  .change-group { margin-bottom: 1.5rem; }
-  .change-group:last-child { margin-bottom: 0; }
-
-  .change-group h3 {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border);
-  }
-
+  .change-group h3 { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
   .change-group.new h3 { color: var(--green); }
-  .change-group.improved h3 { color: var(--blue); }
-  .change-group.fixed h3 { color: #c0392b; }
-
   .change-group ul { list-style: none; }
-  .change-group li {
-    font-size: 0.875rem;
-    line-height: 1.65;
-    color: var(--text-light);
-    padding: 0.3rem 0;
-    padding-left: 1.25rem;
-    position: relative;
-  }
-
+  .change-group li { font-size: 0.875rem; line-height: 1.65; color: var(--text-light); padding: 0.3rem 0; padding-left: 1.25rem; position: relative; }
   .change-group.new li::before { content: '+'; position: absolute; left: 0; color: var(--green); font-weight: 700; font-family: 'IBM Plex Mono', monospace; }
-  .change-group.improved li::before { content: '↑'; position: absolute; left: 0; color: var(--blue); font-weight: 700; font-family: 'IBM Plex Mono', monospace; }
-  .change-group.fixed li::before { content: '✓'; position: absolute; left: 0; color: #c0392b; font-weight: 700; font-family: 'IBM Plex Mono', monospace; }
-
   code { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; background: var(--blue-light); color: var(--blue); padding: 0.1rem 0.4rem; border-radius: 4px; }
 
   footer { position: relative; z-index: 1; background: var(--text); color: rgba(255,255,255,0.6); padding: 2.5rem 2rem; }
   .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-  .footer-brand { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem; font-weight: 700; color: white; }
+  .footer-brand { font-size: 0.95rem; font-weight: 700; color: white; }
   .footer-links { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
-  .footer-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.15s; }
-  .footer-links a:hover { color: white; }
+  .footer-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.5); text-decoration: none; }
   .footer-copy { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; }
-
-  @media (max-width: 768px) { .nav-links { display: none; } .release-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; } }
 </style>
 </head>
 <body>
 
 <nav>
   <a class="nav-brand" href="index.html">
-    <img src="icon1024.png" alt="ExcelLink for Autodesk® Revit®">
     <span><b>ExcelLink</b> <em>for Autodesk® Revit®</em></span>
   </a>
   <ul class="nav-links">
@@ -149,6 +82,28 @@
   <h1>Release Notes</h1>
   <p class="subtitle">Version history for ExcelLink for Autodesk® Revit®</p>
 
+  <!-- v1.1.0 -->
+  <div class="release">
+    <div class="release-header">
+      <div class="release-version">Version 1.1.0</div>
+      <div class="release-meta">
+        <span class="badge badge-initial">Latest Release</span>
+        <span class="badge badge-date">August 2026</span>
+      </div>
+    </div>
+    <div class="release-body">
+      <div class="change-group new">
+        <h3>New & Improvements</h3>
+        <ul>
+          <li>Enhanced cross-version compatibility for Autodesk® Revit® 2022 through 2027, resolving .NET Framework 4.8 and .NET 8 threading synchronization challenges.</li>
+          <li>Optimized thread-safe UI dispatching mechanisms ensuring zero interface freezes during rapid multi-category selections.</li>
+          <li>Integrated advanced dynamic Discipline and Category Type filters.</li>
+          <li>Improved performance and stability across Model, Selection, and Active View scope switches.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
   <!-- v1.0 -->
   <div class="release">
     <div class="release-header">
@@ -159,26 +114,14 @@
       </div>
     </div>
     <div class="release-body">
-
       <div class="change-group new">
         <h3>New</h3>
         <ul>
-          <li>Export Autodesk® Revit® element parameters to <code>.xlsx</code> with per-category or single-sheet output.</li>
-          <li>Import updated values back to Autodesk® Revit® in a single transaction using element Unique IDs for matching.</li>
-          <li>Support for Autodesk® Revit® 2022, 2023, 2024, 2025, 2026 and 2027.</li>
-          <li>Linked document support — export parameters from loaded Autodesk® Revit® link instances.</li>
-          <li>Include or exclude type parameters on a per-export basis.</li>
-          <li>Drag-and-drop parameter column reordering before export.</li>
-          <li>Save and load export configuration to a <code>.json</code> file for reuse.</li>
-          <li>Cell color coding: white (writable), pink (read-only), yellow (type), red (missing), gray (linked).</li>
-          <li>Trial mode with 10-element export limit per category — no registration required.</li>
-          <li>Online license activation with 30-day offline grace period.</li>
-          <li>Shared parameter matching via GUID; built-in parameter matching via internal ID — reliable across model transfers.</li>
-          <li>Double values always exported with <code>InvariantCulture</code> decimal format (period separator) regardless of system locale.</li>
-          <li>Floating-point precision rounding to 6 decimal places eliminates unit conversion noise (e.g. 6920 mm roundtrips cleanly).</li>
+          <li>Export Autodesk® Revit® element parameters to <code>.xlsx</code> with per-category or single-sheet output[cite: 4].</li>
+          <li>Import updated values back to Autodesk® Revit® in a single transaction using element Unique IDs[cite: 4].</li>
+          <li>Linked document support and configurable type parameter inclusions[cite: 4].</li>
         </ul>
       </div>
-
     </div>
   </div>
 
@@ -191,4 +134,11 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="user-guide.html">User Guide</a></li>
       <li><a href="privacy-policy.html">Privacy Policy</a></li>
-      <li><a href="/cdn-cgi/l/email-protection#fc9d9489868992998ebc9b919d9590d29f9391"><span class="__cf_email__" data-cfemail="f190998
+      <li><a href="mailto:ahuzuner@gmail.com">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Haluk Uzuner</div>
+  </div>
+</footer>
+
+</body>
+</html>
