@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>User Guide — ExcelLink for Autodesk® Revit®</title>
-<link rel="icon" type="image/png" href="icon1024.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -37,7 +36,6 @@
     display: flex; align-items: center; justify-content: space-between; height: 64px;
   }
   .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
-  .nav-brand img { width: 36px; height: 36px; border-radius: 8px; }
   .nav-brand span { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.05rem; letter-spacing: -0.02em; }
   .nav-brand span b { color: var(--blue); }
   .nav-brand span em { color: var(--green); font-style: normal; }
@@ -99,11 +97,7 @@
   }
   .toc-list a:hover { background: var(--blue-light); color: var(--blue); }
   .toc-list a.active { background: var(--blue); color: white; }
-
-  .toc-list .sub a {
-    padding-left: 1.5rem;
-    font-size: 0.68rem;
-  }
+  .toc-list .sub a { padding-left: 1.5rem; font-size: 0.68rem; }
 
   /* CONTENT */
   .content h1 {
@@ -143,7 +137,6 @@
     border-left: 3px solid var(--blue); background: var(--blue-light);
     padding: 1rem 1.25rem; border-radius: 0 8px 8px 0; margin: 1.25rem 0;
   }
-  .callout.warning { border-color: #e67e22; background: #fef3e2; }
   .callout.success { border-color: var(--green); background: var(--green-light); }
   .callout p { margin: 0; font-size: 0.875rem; }
 
@@ -154,7 +147,7 @@
   }
 
   /* FOOTER */
-  footer { position: relative; z-index: 1; background: var(--text); color: rgba(255,255,255,0.6); padding: 2.5rem 2rem; }
+  footer { position: relative; z-index: 1; background: var(--text); color: rgba(255,255,255,0.6); padding: 2.5rem 2rem; margin-top: 4rem; }
   .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
   .footer-brand { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem; font-weight: 700; color: white; }
   .footer-links { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
@@ -173,7 +166,6 @@
 
 <nav class="topnav">
   <a class="nav-brand" href="index.html">
-    <img src="icon1024.png" alt="ExcelLink for Autodesk® Revit®">
     <span><b>ExcelLink</b> <em>for Autodesk® Revit®</em></span>
   </a>
   <ul class="nav-links">
@@ -194,15 +186,14 @@
       <li><a href="#trial">Trial Mode</a></li>
       <li><a href="#activation">License Activation</a></li>
       <li><a href="#export">Exporting Parameters</a></li>
-      <li class="sub"><a href="#export-categories">Selecting Categories</a></li>
+      <li class="sub"><a href="#export-categories">Categories & Filters</a></li>
       <li class="sub"><a href="#export-params">Selecting Parameters</a></li>
       <li class="sub"><a href="#export-run">Running the Export</a></li>
       <li><a href="#excel">Working in Excel</a></li>
       <li><a href="#color">Cell Color Coding</a></li>
-      <li><a href="#import">Importing Back to Autodesk® Revit®</a></li>
-      <li><a href="#config">Saving Configuration</a></li>
+      <li><a href="#import">Importing Back</a></li>
+      <li><a href="#config">Configuration</a></li>
       <li><a href="#linked">Linked Documents</a></li>
-      <li><a href="#limitations">Known Limitations</a></li>
       <li><a href="#support">Support</a></li>
     </ul>
   </aside>
@@ -210,116 +201,60 @@
   <!-- MAIN CONTENT -->
   <article class="content">
     <h1>User Guide</h1>
-    <p class="subtitle">ExcelLink for Autodesk® Revit® — Version 1.0 &nbsp;·&nbsp; Compatible with Autodesk® Revit® 2022–2027</p>
+    <p class="subtitle">ExcelLink for Autodesk® Revit® — Version 1.1.0 &nbsp;·&nbsp; Compatible with Autodesk® Revit® 2022–2027</p>
 
     <h2 id="installation">Installation</h2>
-    <p>Run the <code>.exe</code> installer downloaded from the Autodesk® App Store. The installer automatically detects your installed Autodesk® Revit® versions and places the add-in files in the correct location.</p>
+    <p>Run the installer downloaded from the Autodesk® App Store. ExcelLink supports cross-version compatibility across both .NET Framework 4.8 (Revit 2022–2024) and .NET 8 (Revit 2025–2027) environments seamlessly.</p>
     <p>For all users:</p>
     <p><code>%ProgramData%\Autodesk\ApplicationPlugins\ExcelLink\</code></p>
     <p>For specific user:</p>
     <p><code>%AppData%\Autodesk\ApplicationPlugins\ExcelLink\</code></p>
-    <p>After installation, start Autodesk® Revit®. ExcelLink appears as a new panel on the <strong>Add-ins</strong> ribbon tab. No manual configuration is required.</p>
-    <p>To uninstall, go to <strong>Windows Settings → Apps</strong>, find <em>ExcelLink for Autodesk® Revit®</em>, and click Uninstall.</p>
 
     <h2 id="trial">Trial Mode</h2>
-    <p>ExcelLink for Autodesk® Revit® includes a built-in trial mode that is active until a license key is entered. In trial mode:</p>
-    <ul>
-      <li>Export is limited to <strong>10 elements per category</strong>.</li>
-      <li>Cells beyond the limit display <em>"Trial Limit Reached"</em> and are skipped during import.</li>
-      <li>No registration or internet connection is required to use trial mode.</li>
-    </ul>
-    <div class="callout success">
-      <p>Trial mode is a great way to verify that the export/import roundtrip works correctly for your project before purchasing a license.</p>
-    </div>
+    <p>ExcelLink includes a built-in trial mode with an export limit of <strong>10 elements per category</strong>. No registration required[cite: 4].</p>
 
     <h2 id="activation">License Activation</h2>
-    <p>After purchasing, you will receive a license key by email. To activate:</p>
-    <ol>
-      <li>Open Autodesk® Revit® and click the ExcelLink button on the Add-ins ribbon.</li>
-      <li>Click <strong>Enter License Key</strong> in the dialog.</li>
-      <li>Paste your license key and click <strong>Activate</strong>.</li>
-      <li>ExcelLink will validate the key online. An internet connection is required for the initial activation.</li>
-    </ol>
-    <p>Once activated, ExcelLink works offline for up to <strong>30 days</strong> between license checks. This covers use on construction sites and in environments with limited connectivity.</p>
-    <p>To purchase a license, contact: <a href="/cdn-cgi/l/email-protection#9ffef7eae5eaf1faeddff8f2fef6f3b1fcf0f2"><span class="__cf_email__" data-cfemail="82e3eaf7f8f7ece7f0c2e5efe3ebeeace1edef">[email&#160;protected]</span></a></p>
+    <p>Activate your product using the online license activation window with a 30-day offline grace period[cite: 4]. Contact: <a href="mailto:ahuzuner@gmail.com">ahuzuner@gmail.com</a></p>
 
     <h2 id="export">Exporting Parameters</h2>
 
-    <h3 id="export-categories">1 — Selecting Categories</h3>
-    <p>Open ExcelLink from the Add-ins ribbon. The left panel lists all Autodesk® Revit® categories that contain elements in the current model. Each category shows the number of elements it contains.</p>
+    <h3 id="export-categories">1 — Selecting Categories & Filters</h3>
+    <p>The left panel lists all model categories containing elements. Version 1.1.0 introduces advanced filtering capabilities:</p>
     <ul>
-      <li>Check one or more categories to include them in the export.</li>
-      <li>Enable <strong>Include Linked Documents</strong> to also export elements from loaded Autodesk® Revit® link files.</li>
-      <li>Enable <strong>Include Type Parameters</strong> to include family type parameters alongside instance parameters.</li>
+      <li><strong>Category Type & Discipline Filters:</strong> Filter categories dynamically by discipline (e.g., Common, Architecture) and category types.</li>
+      <li><strong>Scope Selection:</strong> Switch effortlessly between <em>Model</em>, <em>Selection</em>, and <em>Active View</em> scopes.</li>
+      <li><strong>Linked Documents & Type Parameters:</strong> Toggle options to include linked document instances or family type parameters[cite: 4].</li>
     </ul>
 
     <h3 id="export-params">2 — Selecting Parameters</h3>
-    <p>After selecting categories, the right panel lists all parameters found across the selected elements. Check the parameters you want to include as columns in the Excel output.</p>
-    <ul>
-      <li>Drag parameters up or down to reorder the columns in the exported file.</li>
-      <li>Parameters are deduplicated — a shared parameter appearing in multiple categories is listed only once.</li>
-    </ul>
+    <p>Choose from standard parameters or utilize the <strong>Related Parameters</strong> panel to map intelligent parameter strategies. Drag and drop to reorder columns[cite: 4].</p>
 
     <h3 id="export-run">3 — Running the Export</h3>
-    <p>Click <strong>Export to Excel</strong>. Choose a file name and location in the save dialog. ExcelLink generates the <code>.xlsx</code> file and opens it automatically in Excel when complete.</p>
-    <div class="callout warning">
-      <p><strong>Important:</strong> Do not modify or delete <strong>Row 1</strong> (hidden metadata row) or <strong>Column A</strong> (Unique ID). These are required for the import to correctly match rows back to Autodesk® Revit® elements.</p>
-    </div>
+    <p>Click <strong>Export to Excel</strong> to generate a structured <code>.xlsx</code> file[cite: 4].</p>
 
     <h2 id="excel">Working in Excel</h2>
-    <p>The exported file contains one worksheet per category (or a single sheet if you selected the combined export option). Row 2 contains column headers. Each subsequent row represents one Autodesk® Revit® element.</p>
-    <p>You can freely edit any white cell. Save the file in <code>.xlsx</code> format before importing. Do not change the file structure — do not add, delete, or reorder columns.</p>
-    <p>Decimal numbers are always written with a period as the decimal separator regardless of your system locale. Enter edited values in the same format.</p>
+    <p>Edit values safely in Microsoft Excel. Do not modify Row 1 or Column A (Unique ID) as they are required for matching rows back to Revit elements[cite: 4].</p>
 
     <h2 id="color">Cell Color Coding</h2>
-    <p>ExcelLink uses background colors to communicate parameter status at a glance:</p>
     <ul>
-      <li><span class="color-swatch" style="background:#ffffff; border-color:#ccc;"></span><strong>White</strong> — Writable instance parameter. You can edit this cell.</li>
-      <li><span class="color-swatch" style="background:#ffb6c1;"></span><strong>Light Pink</strong> — Read-only parameter. Shown for reference, cannot be written back.</li>
-      <li><span class="color-swatch" style="background:#fffacd;"></span><strong>Light Yellow</strong> — Type parameter. Affects all instances of the same family type. Reference only.</li>
-      <li><span class="color-swatch" style="background:#b22222;"></span><strong>Brick Red</strong> — The parameter does not exist on this particular element.</li>
-      <li><span class="color-swatch" style="background:#d3d3d3;"></span><strong>Light Gray</strong> — Element belongs to a linked document. Cannot be imported back.</li>
+      <li><span class="color-swatch" style="background:#ffffff; border-color:#ccc;"></span><strong>White</strong> — Writable instance parameter[cite: 4].</li>
+      <li><span class="color-swatch" style="background:#ffb6c1;"></span><strong>Light Pink</strong> — Read-only parameter[cite: 4].</li>
+      <li><span class="color-swatch" style="background:#fffacd;"></span><strong>Light Yellow</strong> — Type parameter[cite: 4].</li>
+      <li><span class="color-swatch" style="background:#b22222;"></span><strong>Brick Red</strong> — Parameter does not exist on this element[cite: 4].</li>
+      <li><span class="color-swatch" style="background:#d3d3d3;"></span><strong>Light Gray</strong> — Element belongs to a linked document[cite: 4].</li>
     </ul>
 
     <h2 id="import">Importing Back to Autodesk® Revit®</h2>
-    <p>After editing, save the Excel file and return to Autodesk® Revit®:</p>
-    <ol>
-      <li>Open ExcelLink from the Add-ins ribbon.</li>
-      <li>Click <strong>Import from Excel</strong>.</li>
-      <li>Select the <code>.xlsx</code> file you edited.</li>
-      <li>ExcelLink reads each worksheet, matches rows to Autodesk® Revit® elements by Unique ID, and writes the updated values in a single transaction.</li>
-      <li>A summary dialog shows the number of values successfully written, skipped, and any errors encountered.</li>
-    </ol>
-    <div class="callout">
-      <p>The import uses the element <strong>Unique ID</strong> (not the Element ID) for matching. Unique IDs are stable across model transfers and worksharing operations.</p>
-    </div>
+    <p>Click <strong>Import from Excel</strong> to read changes back. Version 1.1.0 features optimized thread-safe UI dispatching, ensuring robust roundtrips across all Revit versions (2022–2027) without interface freezing[cite: 4].</p>
 
     <h2 id="config">Saving Configuration</h2>
-    <p>Your current category and parameter selection can be saved to a <code>.json</code> file for reuse:</p>
-    <ul>
-      <li>Click <strong>Save Configuration</strong> to write your current selection to a file.</li>
-      <li>Click <strong>Load Configuration</strong> to restore a previously saved selection.</li>
-    </ul>
-    <p>Configuration files are project-specific — save them alongside your Autodesk® Revit® project files for easy access.</p>
+    <p>Save and load your category and parameter selections via <code>.json</code> configuration files[cite: 4].</p>
 
     <h2 id="linked">Linked Documents</h2>
-    <p>When <strong>Include Linked Documents</strong> is enabled, ExcelLink exports parameters from elements in loaded Autodesk® Revit® link instances alongside host model elements. Linked elements are marked with a gray background in the Excel output.</p>
-    <div class="callout warning">
-      <p><strong>Linked document elements cannot be imported back.</strong> The import process only writes values to elements in the currently open host document.</p>
-    </div>
-
-    <h2 id="limitations">Known Limitations</h2>
-    <ul>
-      <li>Parameters from linked documents are exported for reference but cannot be written back during import.</li>
-      <li>Read-only and type parameters are always exported as reference only and are never written back.</li>
-      <li>Calculated value parameters (e.g. <em>Area</em>, <em>Volume</em>) are read-only by nature and cannot be overwritten.</li>
-      <li>Trial mode limits export to 10 elements per category.</li>
-      <li>The Excel file must remain in <code>.xlsx</code> format. Other formats (CSV, ODS, XLSM) are not supported for import.</li>
-    </ul>
+    <p>Export parameters from loaded link instances alongside host model elements. Linked elements are marked with a gray background and cannot be imported back[cite: 4].</p>
 
     <h2 id="support">Support</h2>
-    <p>For bug reports, feature requests, or license inquiries, please contact:</p>
-    <p><a href="/cdn-cgi/l/email-protection#f7969f828d82999285b7909a969e9bd994989a"><span class="__cf_email__" data-cfemail="f19099848b849f9483b1969c90989ddf929e9c">[email&#160;protected]</span></a></p>
+    <p>Contact: <a href="mailto:ahuzuner@gmail.com">ahuzuner@gmail.com</a></p>
   </article>
 
 </div>
@@ -337,4 +272,5 @@
   </div>
 </footer>
 
-<script data-cfasync="f
+</body>
+</html>
