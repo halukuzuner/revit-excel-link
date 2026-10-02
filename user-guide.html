@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="icon1024.png">
 <title>User Guide — ExcelLink for Autodesk® Revit®</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -201,57 +202,64 @@
   <!-- MAIN CONTENT -->
   <article class="content">
     <h1>User Guide</h1>
-    <p class="subtitle">ExcelLink for Autodesk® Revit® — Version 1.1.0 &nbsp;·&nbsp; Compatible with Autodesk® Revit® 2022–2027</p>
+    <p class="subtitle">ExcelLink for Autodesk® Revit® — Version 1.1.1 &nbsp;·&nbsp; Compatible with Autodesk® Revit® 2022–2027</p>
 
     <h2 id="installation">Installation</h2>
     <p>Run the installer downloaded from the Autodesk® App Store. ExcelLink supports cross-version compatibility across both .NET Framework 4.8 (Revit 2022–2024) and .NET 8 (Revit 2025–2027) environments seamlessly.</p>
     <p>For all users:</p>
-    <p><code>%ProgramData%\Autodesk\ApplicationPlugins\ExcelLink\</code></p>
+    <p><code>%ProgramData%\Autodesk\ApplicationPlugins\ExcelLink.bundle\</code></p>
     <p>For specific user:</p>
-    <p><code>%AppData%\Autodesk\ApplicationPlugins\ExcelLink\</code></p>
+    <p><code>%AppData%\Autodesk\ApplicationPlugins\ExcelLink.bundle\</code></p>
 
     <h2 id="trial">Trial Mode</h2>
-    <p>ExcelLink includes a built-in trial mode with an export limit of <strong>10 elements per category</strong>. No registration required[cite: 4].</p>
+    <p>ExcelLink includes a built-in trial mode with an export limit of <strong>10 elements per category</strong>. No registration required.</p>
 
     <h2 id="activation">License Activation</h2>
-    <p>Activate your product using the online license activation window with a 30-day offline grace period[cite: 4]. Contact: <a href="mailto:ahuzuner@gmail.com">ahuzuner@gmail.com</a></p>
+    <p>Activate your product using the online license activation window with a 30-day offline grace period. Contact: <a href="mailto:ahuzuner@gmail.com">ahuzuner@gmail.com</a></p>
 
     <h2 id="export">Exporting Parameters</h2>
 
     <h3 id="export-categories">1 — Selecting Categories & Filters</h3>
-    <p>The left panel lists all model categories containing elements. Version 1.1.0 introduces advanced filtering capabilities:</p>
+    <p>The left panel lists all model categories containing elements. The following filters are available:</p>
     <ul>
       <li><strong>Category Type & Discipline Filters:</strong> Filter categories dynamically by discipline (e.g., Common, Architecture) and category types.</li>
       <li><strong>Scope Selection:</strong> Switch effortlessly between <em>Model</em>, <em>Selection</em>, and <em>Active View</em> scopes.</li>
-      <li><strong>Linked Documents & Type Parameters:</strong> Toggle options to include linked document instances or family type parameters[cite: 4].</li>
+      <li><strong>Linked Documents & Type Parameters:</strong> Toggle options to include linked document instances or family type parameters.</li>
     </ul>
 
     <h3 id="export-params">2 — Selecting Parameters</h3>
-    <p>Choose from standard parameters or utilize the <strong>Related Parameters</strong> panel to map intelligent parameter strategies. Drag and drop to reorder columns[cite: 4].</p>
+    <p>Choose from standard parameters or utilize the <strong>Related Parameters</strong> panel to map intelligent parameter strategies. Drag and drop to reorder columns.</p>
 
     <h3 id="export-run">3 — Running the Export</h3>
-    <p>Click <strong>Export to Excel</strong> to generate a structured <code>.xlsx</code> file[cite: 4].</p>
+    <p>Click <strong>Export to Excel</strong> and choose where to save the <code>.xlsx</code> file. If the target file is currently open in Excel, ExcelLink asks you to close it before the export starts.</p>
+    <p>When exporting one sheet per category, each sheet only contains the parameter columns that exist on that category's elements, so sheets stay compact.</p>
 
     <h2 id="excel">Working in Excel</h2>
-    <p>Edit values safely in Microsoft Excel. Do not modify Row 1 or Column A (Unique ID) as they are required for matching rows back to Revit elements[cite: 4].</p>
+    <p>Edit values safely in Microsoft Excel. Do not modify Row 1 or Column A (Unique ID) as they are required for matching rows back to Revit elements.</p>
 
     <h2 id="color">Cell Color Coding</h2>
     <ul>
-      <li><span class="color-swatch" style="background:#ffffff; border-color:#ccc;"></span><strong>White</strong> — Writable instance parameter[cite: 4].</li>
-      <li><span class="color-swatch" style="background:#ffb6c1;"></span><strong>Light Pink</strong> — Read-only parameter[cite: 4].</li>
-      <li><span class="color-swatch" style="background:#fffacd;"></span><strong>Light Yellow</strong> — Type parameter[cite: 4].</li>
-      <li><span class="color-swatch" style="background:#b22222;"></span><strong>Brick Red</strong> — Parameter does not exist on this element[cite: 4].</li>
-      <li><span class="color-swatch" style="background:#d3d3d3;"></span><strong>Light Gray</strong> — Element belongs to a linked document[cite: 4].</li>
+      <li><span class="color-swatch" style="background:#ffffff; border-color:#ccc;"></span><strong>White</strong> — Writable instance parameter.</li>
+      <li><span class="color-swatch" style="background:#ffb6c1;"></span><strong>Light Pink</strong> — Read-only parameter.</li>
+      <li><span class="color-swatch" style="background:#fffacd;"></span><strong>Light Yellow</strong> — Type parameter.</li>
+      <li><span class="color-swatch" style="background:#b22222;"></span><strong>Brick Red</strong> — Parameter does not exist on this element.</li>
+      <li><span class="color-swatch" style="background:#d3d3d3;"></span><strong>Light Gray</strong> — Element belongs to a linked document.</li>
     </ul>
 
     <h2 id="import">Importing Back to Autodesk® Revit®</h2>
-    <p>Click <strong>Import from Excel</strong> to read changes back. Version 1.1.0 features optimized thread-safe UI dispatching, ensuring robust roundtrips across all Revit versions (2022–2027) without interface freezing[cite: 4].</p>
+    <p>Click <strong>Import from Excel</strong> to read changes back. Each row is matched to its element by Unique ID and all changes from a sheet are applied in a single transaction, so one <strong>Undo</strong> reverts the whole import.</p>
+    <ul>
+      <li><strong>Only changed values are written.</strong> Cells whose value already matches the model are left untouched, which keeps imports fast and avoids unnecessary element ownership requests in workshared models.</li>
+      <li><strong>Import summary.</strong> After import, a report shows how many values were updated, already up to date, not applicable, or rejected by Autodesk® Revit®, and which sheets (if any) could not be applied.</li>
+      <li><strong>Duplicate rows.</strong> If the same element appears in more than one row, the first row is used and the others are ignored.</li>
+      <li><strong>Warnings.</strong> Autodesk® Revit® warnings raised during import (for example, duplicate Mark values) are written to the import log instead of interrupting the process.</li>
+    </ul>
 
     <h2 id="config">Saving Configuration</h2>
-    <p>Save and load your category and parameter selections via <code>.json</code> configuration files[cite: 4].</p>
+    <p>Save and load your category and parameter selections via <code>.json</code> configuration files.</p>
 
     <h2 id="linked">Linked Documents</h2>
-    <p>Export parameters from loaded link instances alongside host model elements. Linked elements are marked with a gray background and cannot be imported back[cite: 4].</p>
+    <p>Export parameters from loaded link instances alongside host model elements. Linked elements are marked with a gray background in the Document Name column and cannot be imported back.</p>
 
     <h2 id="support">Support</h2>
     <p>Contact: <a href="mailto:ahuzuner@gmail.com">ahuzuner@gmail.com</a></p>
