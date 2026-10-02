@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — ExcelLink for Autodesk® Revit®</title>
 <link rel="icon" type="image/png" href="icon1024.png">
-<title>Release Notes — ExcelLink for Autodesk® Revit®</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -14,151 +14,229 @@
     --gray: #8a9aaa; --grid: #c8d8e8; --bg: #f4f7fb; --white: #ffffff;
     --text: #1a2332; --text-light: #4a5a6a; --border: #dde6f0;
   }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
   body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); }
+
   body::before {
     content: ''; position: fixed; inset: 0;
-    background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-    background-size: 50px 35px; opacity: 0.35; pointer-events: none; z-index: 0;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 50px 35px; opacity: 0.35;
+    pointer-events: none; z-index: 0;
   }
-  nav {
+
+  /* NAV */
+  nav.topnav {
     position: sticky; top: 0; z-index: 100;
     background: rgba(244,247,251,0.92); backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border); padding: 0 2rem;
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
     display: flex; align-items: center; justify-content: space-between; height: 64px;
   }
   .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
-  .nav-brand span { font-weight: 700; font-size: 1.05rem; }
+  .nav-brand img { width: 36px; height: 36px; border-radius: 8px; }
+  .nav-brand span { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.05rem; letter-spacing: -0.02em; }
   .nav-brand span b { color: var(--blue); }
   .nav-brand span em { color: var(--green); font-style: normal; }
   .nav-links { display: flex; gap: 0.25rem; list-style: none; }
   .nav-links a {
     font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; font-weight: 500;
-    text-decoration: none; color: var(--text-light); padding: 0.4rem 0.8rem; border-radius: 6px;
+    text-decoration: none; color: var(--text-light);
+    padding: 0.4rem 0.8rem; border-radius: 6px; transition: all 0.15s;
   }
   .nav-links a:hover { background: var(--blue-light); color: var(--blue); }
   .nav-links a.active { background: var(--blue); color: white; }
 
-  .page-wrap { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding: 4rem 2rem 6rem; }
-  h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
-  .subtitle { font-size: 1rem; color: var(--text-light); font-weight: 300; margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
-  .release { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 2rem; }
-  .release-header { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem; border-bottom: 1px solid var(--border); background: var(--bg); }
-  .release-version { font-size: 1.3rem; font-weight: 800; }
-  .release-meta { display: flex; align-items: center; gap: 0.75rem; }
-  .badge { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; padding: 0.25rem 0.6rem; border-radius: 20px; }
-  .badge-initial { background: var(--blue); color: white; }
-  .badge-date { background: var(--bg); color: var(--gray); border: 1px solid var(--border); }
-  .release-body { padding: 1.75rem 2rem; }
-  .change-group h3 { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
-  .change-group.new h3 { color: var(--green); }
-  .change-group ul { list-style: none; }
-  .change-group li { font-size: 0.875rem; line-height: 1.65; color: var(--text-light); padding: 0.3rem 0; padding-left: 1.25rem; position: relative; }
-  .change-group.new li::before { content: '+'; position: absolute; left: 0; color: var(--green); font-weight: 700; font-family: 'IBM Plex Mono', monospace; }
-  .change-group + .change-group { margin-top: 1.5rem; }
-  .change-group.fix h3 { color: var(--blue); }
-  .change-group.fix li::before { content: '•'; position: absolute; left: 0.2rem; color: var(--blue); font-weight: 700; }
-  code { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; background: var(--blue-light); color: var(--blue); padding: 0.1rem 0.4rem; border-radius: 4px; }
+  /* PAGE LAYOUT */
+  .page-layout {
+    position: relative; z-index: 1;
+    max-width: 1100px; margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+    display: grid;
+    grid-template-columns: 210px 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
 
+  /* TOC SIDEBAR */
+  .toc-sidebar {
+    position: sticky;
+    top: 88px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .toc-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+    padding: 1rem 1.25rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0.5rem 0.5rem;
+  }
+
+  .toc-list li { }
+
+  .toc-list a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 0.35rem 0.75rem;
+    border-radius: 5px;
+    display: block;
+    transition: all 0.15s;
+  }
+  .toc-list a:hover { background: var(--blue-light); color: var(--blue); }
+  .toc-list a.active { background: var(--blue); color: white; }
+
+  /* CONTENT */
+  .content h1 {
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.5rem; font-weight: 800;
+    letter-spacing: -0.03em; margin-bottom: 0.5rem;
+  }
+  .content .subtitle {
+    font-size: 0.875rem; color: var(--text-light); font-weight: 300;
+    margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .content h2 {
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 700;
+    letter-spacing: -0.02em; margin-top: 3rem; margin-bottom: 1rem;
+    padding-top: 2rem; border-top: 1px solid var(--border);
+    scroll-margin-top: 88px;
+  }
+  .content h2:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+  .content p { font-size: 0.9rem; line-height: 1.75; color: var(--text-light); margin-bottom: 0.75rem; }
+  .content ul { margin: 0.5rem 0 0.75rem 1.25rem; }
+  .content li { font-size: 0.9rem; line-height: 1.75; color: var(--text-light); margin-bottom: 0.25rem; }
+  .content a { color: var(--blue); }
+  strong { color: var(--text); font-weight: 500; }
+
+  .info-box {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.5rem; margin: 1.25rem 0;
+  }
+  .info-box p { margin: 0; font-size: 0.875rem; line-height: 1.75; }
+
+  /* FOOTER */
   footer { position: relative; z-index: 1; background: var(--text); color: rgba(255,255,255,0.6); padding: 2.5rem 2rem; }
   .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-  .footer-brand { font-size: 0.95rem; font-weight: 700; color: white; }
+  .footer-brand { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem; font-weight: 700; color: white; }
   .footer-links { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
-  .footer-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.5); text-decoration: none; }
+  .footer-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.15s; }
+  .footer-links a:hover { color: white; }
   .footer-copy { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; }
+
+  @media (max-width: 768px) {
+    .page-layout { grid-template-columns: 1fr; }
+    .toc-sidebar { position: static; }
+    .nav-links { display: none; }
+  }
 </style>
 </head>
 <body>
 
-<nav>
+<nav class="topnav">
   <a class="nav-brand" href="index.html">
+    <img src="icon1024.png" alt="ExcelLink for Autodesk® Revit®">
     <span><b>ExcelLink</b> <em>for Autodesk® Revit®</em></span>
   </a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="user-guide.html">User Guide</a></li>
-    <li><a href="release-notes.html" class="active">Release Notes</a></li>
-    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+    <li><a href="release-notes.html">Release Notes</a></li>
+    <li><a href="privacy-policy.html" class="active">Privacy Policy</a></li>
   </ul>
 </nav>
 
-<div class="page-wrap">
-  <h1>Release Notes</h1>
-  <p class="subtitle">Version history for ExcelLink for Autodesk® Revit®</p>
+<div class="page-layout">
 
-  <!-- v1.1.1 -->
-  <div class="release">
-    <div class="release-header">
-      <div class="release-version">Version 1.1.1</div>
-      <div class="release-meta">
-        <span class="badge badge-initial">Latest Release</span>
-        <span class="badge badge-date">October 2026</span>
-      </div>
-    </div>
-    <div class="release-body">
-      <div class="change-group new">
-        <h3>Improvements</h3>
-        <ul>
-          <li>Import now writes only the values that have actually changed, making imports faster and avoiding unnecessary element ownership requests in workshared models.</li>
-          <li>A detailed import summary is shown after each import: updated, already up-to-date, not applicable and rejected values are reported separately.</li>
-          <li>Autodesk® Revit® warnings raised during import (such as duplicate Mark values) are logged instead of interrupting the import with dialogs.</li>
-          <li>When exporting one sheet per category, each sheet now contains only the parameter columns that exist on that category, keeping workbooks compact.</li>
-          <li>The save location is now asked before the export starts; if the target file is open in Excel, the export is stopped before any work is done.</li>
-        </ul>
-      </div>
-      <div class="change-group fix">
-        <h3>Fixes</h3>
-        <ul>
-          <li>Fixed a success message being shown even when an import could not be applied and was rolled back.</li>
-          <li>Fixed an import error when the same element appeared in more than one row; the first row is now used and duplicates are ignored.</li>
-          <li>Fixed numeric values being read with the system's regional format on some Windows locales, which could cause unchanged values to be rewritten.</li>
-          <li>Fixed parameter values shifting one column in per-category sheets in certain parameter selections.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+  <!-- TOC SIDEBAR -->
+  <aside class="toc-sidebar">
+    <div class="toc-header">Contents</div>
+    <ul class="toc-list">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#data-collected">Data Collected</a></li>
+      <li><a href="#license">License Validation</a></li>
+      <li><a href="#no-data">What We Don't Collect</a></li>
+      <li><a href="#retention">Data Retention</a></li>
+      <li><a href="#third-party">Third Parties</a></li>
+      <li><a href="#rights">Your Rights</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </aside>
 
-  <!-- v1.1.0 -->
-  <div class="release">
-    <div class="release-header">
-      <div class="release-version">Version 1.1.0</div>
-      <div class="release-meta">
-        <span class="badge badge-date">August 2026</span>
-      </div>
-    </div>
-    <div class="release-body">
-      <div class="change-group new">
-        <h3>New & Improvements</h3>
-        <ul>
-          <li>Enhanced cross-version compatibility for Autodesk® Revit® 2022 through 2027, resolving .NET Framework 4.8 and .NET 8 threading synchronization challenges.</li>
-          <li>Optimized thread-safe UI dispatching mechanisms ensuring zero interface freezes during rapid multi-category selections.</li>
-          <li>Integrated advanced dynamic Discipline and Category Type filters.</li>
-          <li>Improved performance and stability across Model, Selection, and Active View scope switches.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+  <!-- MAIN CONTENT -->
+  <article class="content">
+    <h1>Privacy Policy</h1>
+    <p class="subtitle">ExcelLink for Autodesk® Revit® &nbsp;·&nbsp; Last updated: March 2026</p>
 
-  <!-- v1.0 -->
-  <div class="release">
-    <div class="release-header">
-      <div class="release-version">Version 1.0.0</div>
-      <div class="release-meta">
-        <span class="badge badge-initial">Initial Release</span>
-        <span class="badge badge-date">March 2026</span>
-      </div>
+    <h2 id="overview">Overview</h2>
+    <p>ExcelLink for Autodesk® Revit® is developed and published by Haluk Uzuner. This policy explains what data the add-in collects, how it is used, and your rights regarding that data.</p>
+    <p>The add-in is designed to operate with minimal data collection. Your Autodesk® Revit® project data and Excel files remain entirely on your own machine and are never transmitted to any server.</p>
+
+    <h2 id="data-collected">Data Collected</h2>
+    <p>The add-in collects only the minimum data necessary to operate the license validation system:</p>
+    <ul>
+      <li><strong>License key</strong> — entered by you during activation. Transmitted to the license server for validation.</li>
+      <li><strong>Machine identifier</strong> — a hardware-based identifier used to associate a license with a specific device. This is not personally identifiable information.</li>
+      <li><strong>Activation timestamp</strong> — the date and time of the most recent successful license check. Stored locally to support the 30-day offline grace period.</li>
+    </ul>
+
+    <h2 id="license">License Validation</h2>
+    <p>When the add-in starts, it contacts the license validation server to verify that the license key is valid. The following data is sent during this check:</p>
+    <ul>
+      <li>Your license key</li>
+      <li>A machine identifier (not linked to your name or email)</li>
+    </ul>
+    <p>License sessions are logged on the server with a timestamp and machine identifier. Session logs are retained for <strong>45 days</strong> and then permanently deleted.</p>
+    <p>The add-in supports <strong>offline use for up to 30 days</strong> after the last successful validation. No data is transmitted during offline operation.</p>
+
+    <h2 id="no-data">What We Don't Collect</h2>
+    <p>The following data is <strong>never collected, transmitted, or stored</strong>:</p>
+    <ul>
+      <li>Your name, email address, or any personal contact information</li>
+      <li>Autodesk® Revit® project files, model data, or parameter values</li>
+      <li>Excel files or their contents</li>
+      <li>Usage statistics, telemetry, or crash reports</li>
+    </ul>
+
+    <h2 id="retention">Data Retention</h2>
+    <div class="info-box">
+      <p><strong>License records</strong> are retained for the duration of the license validity period, then deleted upon expiry.<br><br>
+      <strong>Session logs</strong> (timestamp + machine ID) are retained for 45 days and then permanently deleted.<br><br>
+      <strong>Local activation data</strong> is stored in your Windows application data folder and is removed when the add-in is uninstalled.</p>
     </div>
-    <div class="release-body">
-      <div class="change-group new">
-        <h3>New</h3>
-        <ul>
-          <li>Export Autodesk® Revit® element parameters to <code>.xlsx</code> with per-category or single-sheet output.</li>
-          <li>Import updated values back to Autodesk® Revit® in a single transaction using element Unique IDs.</li>
-          <li>Linked document support and configurable type parameter inclusions.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+
+    <h2 id="third-party">Third Parties</h2>
+    <p>The add-in does not share any data with third parties. The license validation server is operated exclusively by Haluk Uzuner and is not shared with any external service provider.</p>
+    <p>The add-in uses the following open-source libraries, which operate entirely locally and transmit no data:</p>
+    <ul>
+      <li><strong>ClosedXML</strong> — for reading and writing Excel files</li>
+      <li><strong>Newtonsoft.Json</strong> — for configuration file serialization</li>
+    </ul>
+
+    <h2 id="rights">Your Rights</h2>
+    <p>You have the right to request deletion of any data associated with your license key. Upon request, license records and associated session logs will be permanently deleted within 30 days.</p>
+
+    <h2 id="contact">Contact</h2>
+    <p>For privacy-related requests or questions:</p>
+    <p><strong>Haluk Uzuner</strong><br>
+    <a href="mailto:ahuzuner@gmail.com">ahuzuner@gmail.com</a></p>
+  </article>
 
 </div>
 
@@ -168,7 +246,7 @@
     <ul class="footer-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="user-guide.html">User Guide</a></li>
-      <li><a href="privacy-policy.html">Privacy Policy</a></li>
+      <li><a href="release-notes.html">Release Notes</a></li>
       <li><a href="mailto:ahuzuner@gmail.com">Contact</a></li>
     </ul>
     <div class="footer-copy">© 2026 Haluk Uzuner</div>
