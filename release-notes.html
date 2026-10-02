@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="icon1024.png">
 <title>Release Notes — ExcelLink for Autodesk® Revit®</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -54,6 +55,9 @@
   .change-group ul { list-style: none; }
   .change-group li { font-size: 0.875rem; line-height: 1.65; color: var(--text-light); padding: 0.3rem 0; padding-left: 1.25rem; position: relative; }
   .change-group.new li::before { content: '+'; position: absolute; left: 0; color: var(--green); font-weight: 700; font-family: 'IBM Plex Mono', monospace; }
+  .change-group + .change-group { margin-top: 1.5rem; }
+  .change-group.fix h3 { color: var(--blue); }
+  .change-group.fix li::before { content: '•'; position: absolute; left: 0.2rem; color: var(--blue); font-weight: 700; }
   code { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; background: var(--blue-light); color: var(--blue); padding: 0.1rem 0.4rem; border-radius: 4px; }
 
   footer { position: relative; z-index: 1; background: var(--text); color: rgba(255,255,255,0.6); padding: 2.5rem 2rem; }
@@ -82,12 +86,43 @@
   <h1>Release Notes</h1>
   <p class="subtitle">Version history for ExcelLink for Autodesk® Revit®</p>
 
+  <!-- v1.1.1 -->
+  <div class="release">
+    <div class="release-header">
+      <div class="release-version">Version 1.1.1</div>
+      <div class="release-meta">
+        <span class="badge badge-initial">Latest Release</span>
+        <span class="badge badge-date">October 2026</span>
+      </div>
+    </div>
+    <div class="release-body">
+      <div class="change-group new">
+        <h3>Improvements</h3>
+        <ul>
+          <li>Import now writes only the values that have actually changed, making imports faster and avoiding unnecessary element ownership requests in workshared models.</li>
+          <li>A detailed import summary is shown after each import: updated, already up-to-date, not applicable and rejected values are reported separately.</li>
+          <li>Autodesk® Revit® warnings raised during import (such as duplicate Mark values) are logged instead of interrupting the import with dialogs.</li>
+          <li>When exporting one sheet per category, each sheet now contains only the parameter columns that exist on that category, keeping workbooks compact.</li>
+          <li>The save location is now asked before the export starts; if the target file is open in Excel, the export is stopped before any work is done.</li>
+        </ul>
+      </div>
+      <div class="change-group fix">
+        <h3>Fixes</h3>
+        <ul>
+          <li>Fixed a success message being shown even when an import could not be applied and was rolled back.</li>
+          <li>Fixed an import error when the same element appeared in more than one row; the first row is now used and duplicates are ignored.</li>
+          <li>Fixed numeric values being read with the system's regional format on some Windows locales, which could cause unchanged values to be rewritten.</li>
+          <li>Fixed parameter values shifting one column in per-category sheets in certain parameter selections.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
   <!-- v1.1.0 -->
   <div class="release">
     <div class="release-header">
       <div class="release-version">Version 1.1.0</div>
       <div class="release-meta">
-        <span class="badge badge-initial">Latest Release</span>
         <span class="badge badge-date">August 2026</span>
       </div>
     </div>
@@ -107,7 +142,7 @@
   <!-- v1.0 -->
   <div class="release">
     <div class="release-header">
-      <div class="release-version">Version 1.0</div>
+      <div class="release-version">Version 1.0.0</div>
       <div class="release-meta">
         <span class="badge badge-initial">Initial Release</span>
         <span class="badge badge-date">March 2026</span>
@@ -117,9 +152,9 @@
       <div class="change-group new">
         <h3>New</h3>
         <ul>
-          <li>Export Autodesk® Revit® element parameters to <code>.xlsx</code> with per-category or single-sheet output[cite: 4].</li>
-          <li>Import updated values back to Autodesk® Revit® in a single transaction using element Unique IDs[cite: 4].</li>
-          <li>Linked document support and configurable type parameter inclusions[cite: 4].</li>
+          <li>Export Autodesk® Revit® element parameters to <code>.xlsx</code> with per-category or single-sheet output.</li>
+          <li>Import updated values back to Autodesk® Revit® in a single transaction using element Unique IDs.</li>
+          <li>Linked document support and configurable type parameter inclusions.</li>
         </ul>
       </div>
     </div>
